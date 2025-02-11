@@ -3,9 +3,12 @@ class Game {
     this.container = document.getElementById('game-container');
     this.character = null;
     this.coins = [];
-    this.punctuation = 0;
+    this.punctuation = 0; // This will store the score
+    this.scoreElement = document.createElement('div'); // Create a div for displaying the score
     this.createScenario();
     this.addEvents();
+    this.eatSound = new Audio("src/sounds/crunch.wav"); // Instantiate sound
+    this.setupScoreDisplay(); // Call to set up score display
   }
 
   createScenario() {
@@ -14,8 +17,18 @@ class Game {
     for (let i = 0; i < 5; i++) {
       const coin = new Coin();
       this.coins.push(coin);
-      this.container.appendChild(coin.element); // corrected here
+      this.container.appendChild(coin.element); // Add coins to the container
     }
+  }
+
+  setupScoreDisplay() {
+    this.scoreElement.style.position = "absolute";
+    this.scoreElement.style.top = "10px";
+    this.scoreElement.style.left = "10px";
+    this.scoreElement.style.fontSize = "24px";
+    this.scoreElement.style.color = "white";
+    this.scoreElement.innerText = `Score: ${this.punctuation}`;
+    this.container.appendChild(this.scoreElement); // Append the score display to the container
   }
 
   addEvents() {
@@ -27,13 +40,22 @@ class Game {
     setInterval(() => {
       this.coins.forEach((coin, index) => {
         if (this.character.collideWith(coin)) {
-          this.container.removeChild(coin.element);
-          this.coins.splice(index, 1);
+          this.eatSound.currentTime = 0; // Reset sound to play immediately
+          this.eatSound.play(); // Play sound
+          this.container.removeChild(coin.element); // Remove the coin
+          this.coins.splice(index, 1); // Remove coin from the array
+          this.incrementScore(); // Increment the score
         }
       });
     }, 100);
   }
+
+  incrementScore() {
+    this.punctuation += 10; // Increment score by 10 points
+    this.scoreElement.innerText = `Score: ${this.punctuation}`; // Update the score display
+  }
 }
+
 
 class Character {
   constructor() {
@@ -54,8 +76,7 @@ class Character {
     const containerHeight = container.offsetHeight;
 
     if (
-      event.key === 'ArrowRight' &&
-      this.x + 100 + this.velocity <= containerWidth
+      event.key === 'ArrowRight' && this.x + 100 + this.velocity <= containerWidth
     ) {
       this.x += this.velocity;
     } else if (event.key === 'ArrowLeft' && this.x - this.velocity >= 0) {
@@ -87,19 +108,19 @@ class Character {
   }
 
   fall() {
-  const container = document.getElementById("game-container");
-  const groundLevel = container.offsetHeight - 80;
+    const container = document.getElementById('game-container');
+    const groundLevel = container.offsetHeight - 80;
 
-  const gravity = setInterval(() => {
-    if (this.y + 20 < groundLevel) {
-      this.y += 10;
-    } else {
-      this.y = groundLevel - 10;
-      clearInterval(gravity);
-    }
-    this.updatePosition();
-  }, 20);
-}
+    const gravity = setInterval(() => {
+      if (this.y + 20 < groundLevel) {
+        this.y += 10;
+      } else {
+        this.y = groundLevel - 10;
+        clearInterval(gravity);
+      }
+      this.updatePosition();
+    }, 20);
+  }
 
   updatePosition() {
     this.element.style.left = `${this.x}px`;
