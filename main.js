@@ -6,6 +6,7 @@ class Game {
     this.punctuation = 0;
     this.createScenario();
     this.addEvents();
+    this.eatSound = new Audio("src/sounds/crunch.wav");
   }
 
   createScenario() {
@@ -14,7 +15,7 @@ class Game {
     for (let i = 0; i < 5; i++) {
       const coin = new Coin();
       this.coins.push(coin);
-      this.container.appendChild(coin.element); // corrected here
+      this.container.appendChild(coin.element);
     }
   }
 
@@ -24,15 +25,18 @@ class Game {
   }
 
   checkCollisions() {
-    setInterval(() => {
-      this.coins.forEach((coin, index) => {
-        if (this.character.collideWith(coin)) {
-          this.container.removeChild(coin.element);
-          this.coins.splice(index, 1);
-        }
-      });
-    }, 100);
-  }
+  const eatSound = new Audio("src/sounds/crunch.wav");
+  setInterval(() => {
+    this.coins.forEach((coin, index) => {
+      if (this.character.collideWith(coin)) {
+        this.eatSound.currentTime = 0;
+        this.eatSound.play();
+        this.container.removeChild(coin.element);
+        this.coins.splice(index, 1);
+      }
+    });
+  }, 100);
+}
 }
 
 class Character {
