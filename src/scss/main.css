@@ -168,13 +168,13 @@
 
 .obstacle {
   position: absolute;
-  width: 100px;
-  height: 80px;
+  width: 80px;
+  height: 60px;
   background-image: url("../../assets/img/shark.png");
   background-size: cover;
   z-index: 99;
   visibility: visible;
-  animation: blink 5s ease-out forwards;
+  animation: swimShark 6s ease-in-out infinite;
 }
 
 .game-over {
@@ -350,5 +350,22 @@
   100% {
     opacity: 0;
     transform: scale(0.5);
+  }
+}
+@keyframes swimShark {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }/*# sourceMappingURL=main.css.map */

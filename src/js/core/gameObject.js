@@ -1,6 +1,6 @@
 export class GameObject {
   constructor(game, container, x, y, width, height, elementClass) {
-    this.game = game; // Now `game` is passed correctly
+    this.game = game;
     this.x = x || Math.random() * (container.offsetWidth - width);
     this.y = y || Math.random() * (container.offsetHeight - height);
     this.width = width;

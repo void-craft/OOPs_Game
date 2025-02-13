@@ -13,7 +13,7 @@ export class Game {
     this.objects = [];
     this.punctuation = 0;
     this.lives = 3;
-    this.maxCoins = 50;
+    this.maxCoins = 20;
     this.totalCoinsSpawned = 0;
     this.totalCoinsCollected = 0;
     this.isGameOver = false;
@@ -65,8 +65,8 @@ export class Game {
 
   /**
    * Handles collision with a coin.
-    @param {Coin} coin
-    @param {number} index - The index of the coin in the objects array.
+   * @param {Coin} coin - The coin object.
+   * @param {number} index - The index of the coin in the objects array.
    */
   handleCoinCollision(coin, index) {
     this.soundManager.play('eat');
@@ -83,13 +83,17 @@ export class Game {
    */
   handleObstacleCollision(index) {
     this.lives--;
-    this.soundManager.play('hit');
-    this.removeObjectFromDOM(this.objects[index]);
-    this.objects.splice(index, 1);
+    this.soundManager.play('hit'); // Play "hit" sound for losing a life
 
     if (this.lives <= 0) {
+      this.soundManager.play('gameOver'); // Play "game over" sound when no lives are left
       this.gameOver();
+    } else {
+      this.soundManager.play('hit'); // Play "hit" sound if lives are still remaining
     }
+
+    this.removeObjectFromDOM(this.objects[index]);
+    this.objects.splice(index, 1);
   }
 
   /**
@@ -105,7 +109,6 @@ export class Game {
   gameOver() {
     this.isGameOver = true;
     this.spawner.stop();
-    this.soundManager.play('gameOver');
     this.soundManager.stop('background');
 
     this.objects.forEach((obj) => this.removeObjectFromDOM(obj));

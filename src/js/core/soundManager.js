@@ -8,25 +8,17 @@ export class SoundManager {
       background: new Audio('./assets/sounds/loop.mp3'),
       wait: new Audio('./assets/sounds/wait.mp3')
     };
-
-    // Enable looping for background music
     this.sounds.background.loop = true;
-
-    // Initialize states
     this.bgMuted = false;
     this.effectsMuted = false;
     this.bgVolume = 1;
     this.effectsVolume = 1;
-
-    // Set initial volumes
     this.sounds.background.volume = this.bgVolume;
     Object.values(this.sounds).forEach(sound => {
       if (sound !== this.sounds.background) {
         sound.volume = this.effectsVolume;
       }
     });
-
-    // Bind methods and set up audio unlock
     this.unlockAudio = this.unlockAudio.bind(this);
     document.addEventListener("click", this.unlockAudio, { once: true });
     document.addEventListener("keydown", this.unlockAudio, { once: true });
@@ -94,9 +86,6 @@ export class SoundManager {
     });
   }
 
-  /**
-   * Toggles muting for background music.
-   */
   muteBg() {
     this.bgMuted = !this.bgMuted;
     if (this.bgMuted) {
@@ -106,9 +95,6 @@ export class SoundManager {
     }
   }
 
-  /**
-   * Toggles muting for sound effects.
-   */
   muteEffects() {
     this.effectsMuted = !this.effectsMuted;
     Object.values(this.sounds).forEach(sound => {
@@ -120,5 +106,18 @@ export class SoundManager {
         }
       }
     });
+  }
+
+  gameOver() {
+    this.stop('background');
+    this.play('gameOver');
+    this.sounds.wait.loop = true;
+    this.play('wait');
+  }
+
+  maxCoins() {
+    this.stop('background');
+    this.sounds.wait.loop = true;
+    this.play('wait');
   }
 }

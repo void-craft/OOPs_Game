@@ -51,3 +51,21 @@
     transform: scale(0.5);
   }
 }
+
+@keyframes swimShark {
+  0% {
+    transform: translateY(0); // Start at the normal position
+  }
+  25% {
+    transform: translateY(-5px); // Move slightly up
+  }
+  50% {
+    transform: translateY(0); // Back to normal
+  }
+  75% {
+    transform: translateY(5px); // Move slightly down
+  }
+  100% {
+    transform: translateY(0); // Reset to the normal position
+  }
+}

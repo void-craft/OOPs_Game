@@ -2,6 +2,7 @@ import { GameObject } from '../core/gameObject.js';
 
 export class Coin extends GameObject {
   constructor(game, container) {
-    super(game, container, null, null, 30, 30, 'coin');
+    const maxY = container.offsetHeight * (2 / 3) - 30;
+    super(game, container, null, Math.random() * maxY, 30, 30, 'coin');
   }
 }
