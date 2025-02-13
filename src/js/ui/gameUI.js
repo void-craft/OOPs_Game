@@ -1,9 +1,12 @@
 export class GameUI {
   constructor(soundManager) {
-    // Initialize DOM elements
-    this.scoreboard = document.querySelector('.main__scoreboard__score'); // Ensure this is the correct selector
-    this.overlay = document.querySelector('.game-over');
-    this.restartButton = document.querySelector('.game-over__restart-button');
+    // Start Screen Elements
+    this.startScreen = document.querySelector('.start-screen');
+    this.playButton = document.querySelector('.start-screen .game-over__restart-button');
+
+    // Game Over Elements
+    this.overlay = document.querySelector('.game-over:not(.start-screen)');
+    this.restartButton = document.querySelector('.game-over:not(.start-screen) .game-over__restart-button');
     this.finalScore = document.querySelector('.game-over__final-score');
     this.finalLives = document.querySelector('.game-over__final-lives');
     this.finalCoins = document.querySelector('.game-over__final-coins');
@@ -41,6 +44,15 @@ export class GameUI {
     } else {
       console.error('Volume effects slider not found.');
     }
+
+    // Add event listener for the play button
+    if (this.playButton) {
+      this.playButton.addEventListener('click', () => {
+        this.hideStartScreen();
+      });
+    } else {
+      console.error('Play button not found.');
+    }
   }
 
   /**
@@ -61,7 +73,6 @@ export class GameUI {
    */
   toggleMuteEffects() {
     this.soundManager.muteEffects();
-    // Change button appearance based on mute state
     if (this.soundManager.effectsMuted) {
       this.muteEffectsButton.classList.add('muted');
     } else {
@@ -96,6 +107,28 @@ export class GameUI {
       this.scoreboard.textContent = `Score: ${score}`;
     } else {
       console.error('Scoreboard element not found.');
+    }
+  }
+
+  /**
+   * Shows the start screen overlay.
+   */
+  showStartScreen() {
+    if (this.startScreen) {
+      this.startScreen.style.display = 'flex';
+    } else {
+      console.error('Start screen overlay not found.');
+    }
+  }
+
+  /**
+   * Hides the start screen overlay.
+   */
+  hideStartScreen() {
+    if (this.startScreen) {
+      this.startScreen.style.display = 'none';
+    } else {
+      console.error('Start screen overlay not found.');
     }
   }
 

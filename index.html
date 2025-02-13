@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
   <script type="module" src="./src/js/main.js" defer></script>
   <link rel="icon" href="data:,">
 </head>
+
 <body class="game">
   <h1 class="game__title">Adventure San Cris</h1>
 
@@ -27,18 +29,28 @@
       <div class="main__sound--effect">
         <button class="main__sound--effect__mute-button" id="mute-effects"></button>
         <div class="main__sound--effect__slider">
-          <input type="range" class="main__sound--volume-input" id="volume-effects" min="0" max="1" step="0.01" value="1">
+          <input type="range" class="main__sound--volume-input" id="volume-effects" min="0" max="1" step="0.01"
+            value="1">
         </div>
       </div>
     </section>
 
     <section class="main__container" aria-label="Game Area"></section>
 
-    <div class="game-over">
-      <h1>Game Over!</h1>
-      <p class="game-over__final-score">Final Score: 0</p>
-      <button class="game-over__restart-button">Restart</button>
-    </div>
+    <!-- Start Screen Overlay -->
+<div class="game-over start-screen">
+  <h1>Welcome to Adventure San Cris!</h1>
+  <button class="game-over__restart-button">Play</button>
+</div>
+
+<!-- Game Over Overlay -->
+<div class="game-over">
+  <h1>Game Over!</h1>
+  <p class="game-over__final-score">Final Score: 0</p>
+  <p class="game-over__final-lives">Lives Left: 0</p>
+  <p class="game-over__final-coins">Coins Collected: 0</p>
+  <button class="game-over__restart-button">Restart</button>
+</div>
 
     <p class="main__attribute">Image by <a
         href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160305">OpenClipart-Vectors</a>
@@ -47,4 +59,5 @@
     </p>
   </main>
 </body>
+
 </html>

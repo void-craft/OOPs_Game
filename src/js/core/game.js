@@ -17,16 +17,27 @@ export class Game {
     this.totalCoinsSpawned = 0;
     this.totalCoinsCollected = 0;
     this.isGameOver = false;
+    this.isGameStarted = false;
 
     this.ui.hideGameOverScreen();
+    this.ui.showStartScreen();
     this.createScenario();
-    this.addEvents();
-    this.spawner = new ObjectSpawner(this);
-    this.spawner.start();
-    this.gameLoop();
 
+    this.spawner = new ObjectSpawner(this);
     this.soundManager = new SoundManager();
     this.soundManager.play('background');
+
+    this.ui.playButton.addEventListener('click', () => {
+      this.startGame();
+    });
+  }
+
+  startGame() {
+    this.isGameStarted = true;
+    this.ui.hideStartScreen();
+    this.spawner.start();
+    this.addEvents();
+    this.gameLoop();
   }
 
   createScenario() {
@@ -123,6 +134,7 @@ export class Game {
 
   restartGame() {
     this.isGameOver = false;
+    this.isGameStarted = true;
     this.ui.hideGameOverScreen();
     this.punctuation = 0;
     this.totalCoinsSpawned = 0;
@@ -133,12 +145,16 @@ export class Game {
     this.objects.forEach((object) => this.removeObjectFromDOM(object));
     this.objects = [];
 
-    this.container.removeChild(this.character.element);
+    if (this.character && this.character.element) {
+      this.container.removeChild(this.character.element);
+    }
     this.character = new Character();
     this.container.appendChild(this.character.element);
 
     this.spawner.start();
     this.soundManager.play('background');
+    this.addEvents();
+    this.gameLoop();
   }
 
   gameLoop() {
