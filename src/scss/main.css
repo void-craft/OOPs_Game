@@ -1,5 +1,70 @@
+.main__sound-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.main__sound-controls__group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main__sound-controls__group--bg,
+.main__sound-controls__group--effects {
+  flex-direction: row;
+}
+
+.main__sound-controls__mute-button {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+}
+
+.main__sound-controls__mute-button--bg {
+  background: url("path-to-shell-icon.png") no-repeat center;
+}
+
+.main__sound-controls__mute-button--bg.muted {
+  background: url("path-to-muted-shell-icon.png") no-repeat center;
+}
+
+.main__sound-controls__mute-button--effects {
+  background: url("path-to-effects-icon.png") no-repeat center;
+}
+
+.main__sound-controls__mute-button--effects.muted {
+  background: url("path-to-muted-effects-icon.png") no-repeat center;
+}
+
+.main__sound-controls__volume-slider {
+  width: 100px;
+}
+
+.main__sound-controls__volume-input {
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main__sound-controls__volume-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
 .main {
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -7,7 +72,7 @@
   justify-content: center;
   width: 100%;
   height: 80vh;
-  gap: 10px;
+  gap: 2%;
   padding: 0;
 }
 .main__scoreboard {
@@ -16,7 +81,7 @@
   color: #f39c12;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
-.main__scoreboard__score {
+.main__scoreboard__score, .main__scoreboard__lives {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .main__scoreboard:hover {
@@ -30,7 +95,7 @@
   width: 60%;
   height: 80%;
   border: 10px solid #f39c12;
-  background-image: url(../../assets/img/game_background.jpg);
+  background-image: url("../../assets/img/game_background.jpg");
   background-size: cover;
   overflow: hidden;
   border-radius: 30px;
@@ -46,7 +111,7 @@
   top: 80px;
   width: 80px;
   height: 80px;
-  background-image: url(../../../assets/img/octopus.png);
+  background-image: url("../../assets/img/octopus.png");
   background-size: cover;
   z-index: 9;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;
@@ -60,11 +125,11 @@
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url(../../assets/img/crabby.png);
+  background-image: url("../../assets/img/coin.png");
   background-size: contain;
   z-index: 10;
   visibility: visible;
-  animation: coinDisappearing 5s ease-out forwards;
+  animation: blink 5s ease-out forwards;
 }
 
 .bubble {
@@ -94,10 +159,11 @@
   position: absolute;
   width: 100px;
   height: 80px;
-  background-image: url(../../assets/img/shark.png);
+  background-image: url("../../assets/img/obstacle.png");
   background-size: cover;
   z-index: 99;
   visibility: visible;
+  animation: blink 5s ease-out forwards;
 }
 
 .game-over {
@@ -135,28 +201,24 @@
   background: #e67e22;
 }
 
-body {
-  transition: background-color 0.3s ease;
-}
-
 .game {
   margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
-  background: linear-gradient(160deg, #2c3e50, #34495e);
   color: #ecf0f1;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   height: 100vh;
-  box-sizing: border-box;
 }
 
-@keyframes coinDisappearing {
+@keyframes blink {
   0% {
     opacity: 1;
-    transform: scale(0.8);
+    transform: scale(1.2);
   }
   25% {
     opacity: 1;
@@ -164,36 +226,105 @@ body {
   }
   50% {
     opacity: 1;
-    transform: scale(0.8);
+    transform: scale(1.2);
   }
   75% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
     opacity: 0.8;
     transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.6);
   }
 }
 @keyframes bubbleAnimation {
   0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  20% {
     opacity: 0.8;
-    transform: scale(1);
-  }
-  25% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  75% {
-    opacity: 0.9;
     transform: scale(0.9);
+  }
+  40% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+  60% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+  80% {
+    opacity: 0.2;
+    transform: scale(0.6);
   }
   100% {
     opacity: 0;
     transform: scale(0.5);
   }
+}
+.main__sound-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.main__sound-controls__group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main__sound-controls__group--bg,
+.main__sound-controls__group--effects {
+  flex-direction: row;
+}
+
+.main__sound-controls__mute-button {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+}
+
+.main__sound-controls__mute-button--bg {
+  background: url("path-to-shell-icon.png") no-repeat center;
+}
+
+.main__sound-controls__mute-button--bg.muted {
+  background: url("path-to-muted-shell-icon.png") no-repeat center;
+}
+
+.main__sound-controls__mute-button--effects {
+  background: url("path-to-effects-icon.png") no-repeat center;
+}
+
+.main__sound-controls__mute-button--effects.muted {
+  background: url("path-to-muted-effects-icon.png") no-repeat center;
+}
+
+.main__sound-controls__volume-slider {
+  width: 100px;
+}
+
+.main__sound-controls__volume-input {
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main__sound-controls__volume-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

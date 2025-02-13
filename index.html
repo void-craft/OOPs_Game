@@ -11,26 +11,41 @@
 </head>
 
 <body class="game">
-  <h1 class="game__title">OOPs Adventure</h1>
+  <h1 class="game__title">Adventure San Cris</h1>
 
   <main class="main">
-    <div class="main__scoreboard">
-      <span class="score">Score: 0</span>
-      <span class="main__lives">Lives: 3</span>
-    </div>
+    <section class="main__scoreboard">
+      <span class="main__scoreboard__score">Score: 0</span>
+      <span class="main__scoreboard__lives">Lives: 3</span>
+    </section>
+    
+    <section class="main__sound-controls">
+      <!-- Background Music Volume Control -->
+      <div class="main__sound-controls__group main__sound-controls__group--bg">
+        <button class="main__sound-controls__mute-button main__sound-controls__mute-button--bg" id="mute-background"></button>
+        <div class="main__sound-controls__volume-slider">
+          <input type="range" class="main__sound-controls__volume-input" id="volume-background" min="0" max="1" step="0.01" value="1">
+        </div>
+      </div>
+
+      <!-- Sound Effects Volume Control -->
+      <div class="main__sound-controls__group main__sound-controls__group--effects">
+        <button class="main__sound-controls__mute-button main__sound-controls__mute-button--effects" id="mute-effects"></button>
+        <div class="main__sound-controls__volume-slider">
+          <input type="range" class="main__sound-controls__volume-input" id="volume-effects" min="0" max="1" step="0.01" value="1">
+        </div>
+      </div>
+    </section>
 
     <section class="main__container" aria-label="Game Area"></section>
+    
     <div class="game-over">
       <h1>Game Over!</h1>
       <p class="game-over__final-score">Final Score: 0</p>
       <button class="game-over__restart-button">Restart</button>
     </div>
 
-    <p class main_attribute>Image by <a
-        href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160305">OpenClipart-Vectors</a>
-      from <a
-        href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160305">Pixabay</a>
-    </p>
+    <p class="main__attribute">Image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160305">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=160305">Pixabay</a></p>
   </main>
 </body>
 

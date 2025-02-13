@@ -1,0 +1,66 @@
+@import "../base/imagePaths";
+
+.main__sound-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.main__sound-controls__group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main__sound-controls__group--bg,
+.main__sound-controls__group--effects {
+  flex-direction: row;
+}
+
+.main__sound-controls__mute-button {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.main__sound-controls__mute-button--bg {
+  background: url($music-on-img) no-repeat center;
+}
+
+.main__sound-controls__mute-button--bg.muted {
+  background: url($music-off-img) no-repeat center;
+}
+
+.main__sound-controls__mute-button--effects {
+  background: url($effect-on-img) no-repeat center;
+}
+
+.main__sound-controls__mute-button--effects.muted {
+  background: url($effect-off-img) no-repeat center;
+}
+
+.main__sound-controls__volume-slider {
+  width: 100px;
+}
+
+.main__sound-controls__volume-input {
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main__sound-controls__volume-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}

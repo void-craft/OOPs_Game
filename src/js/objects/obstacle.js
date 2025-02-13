@@ -1,4 +1,4 @@
-import { GameObject } from './gameObject.js';
+import { GameObject } from '../core/gameObject.js';
 
 export class Obstacle extends GameObject {
   constructor(game, container) {

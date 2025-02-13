@@ -1,9 +1,12 @@
+@import '../base/imagePaths'; 
+
 .obstacle {
   position: absolute;
   width: 100px;
   height: 80px;
-  background-image: url(../../assets/img/shark.png);
+  background-image: $obstacle-img;
   background-size: cover;
   z-index: 99;
   visibility: visible;
+  animation: blink 5s ease-out forwards;
 }

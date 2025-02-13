@@ -1,5 +1,5 @@
 import { Coin } from '../objects/coin.js';
-import { Obstacle } from '../components/obstacle.js';
+import { Obstacle } from '../objects/obstacle.js';
 
 export class ObjectSpawner {
   constructor(game) {

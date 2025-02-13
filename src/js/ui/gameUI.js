@@ -6,6 +6,49 @@ export class GameUI {
     this.finalScore = document.querySelector('.game-over__final-score');
     this.finalLives = document.querySelector('.game-over__final-lives');
     this.finalCoins = document.querySelector('.game-over__final-coins');
+    
+    // Background music and sound effects controls
+    this.muteBackgroundButton = document.getElementById('mute-background');
+    this.volumeBackgroundSlider = document.getElementById('volume-background');
+    this.muteEffectsButton = document.getElementById('mute-effects');
+    this.volumeEffectsSlider = document.getElementById('volume-effects');
+
+    // Event Listeners for volume and mute buttons
+    this.muteBackgroundButton.addEventListener('click', () => this.toggleMuteBackground());
+    this.volumeBackgroundSlider.addEventListener('input', (e) => this.adjustVolumeBackground(e));
+
+    this.muteEffectsButton.addEventListener('click', () => this.toggleMuteEffects());
+    this.volumeEffectsSlider.addEventListener('input', (e) => this.adjustVolumeEffects(e));
+  }
+
+  toggleMuteBackground() {
+    this.soundManager.muteBg();
+    // Change button appearance based on mute state (e.g., different icon for muted state)
+    if (this.soundManager.bgMuted) {
+      this.muteBackgroundButton.classList.add('muted');
+    } else {
+      this.muteBackgroundButton.classList.remove('muted');
+    }
+  }
+
+  toggleMuteEffects() {
+    this.soundManager.muteEffects();
+    // Change button appearance based on mute state (e.g., different icon for muted state)
+    if (this.soundManager.effectsMuted) {
+      this.muteEffectsButton.classList.add('muted');
+    } else {
+      this.muteEffectsButton.classList.remove('muted');
+    }
+  }
+
+  adjustVolumeBackground(e) {
+    const volume = e.target.value;
+    this.soundManager.setBgVolume(volume);
+  }
+
+  adjustVolumeEffects(e) {
+    const volume = e.target.value;
+    this.soundManager.setEffectsVolume(volume);
   }
 
   updateScore(score) {

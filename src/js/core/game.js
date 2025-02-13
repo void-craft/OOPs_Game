@@ -1,8 +1,9 @@
-import { Character } from '../components/character.js';
+import { Character } from '../objects/character.js';
 import { Coin } from '../objects/coin.js';
-import { Obstacle } from '../components/obstacle.js';
+import { Obstacle } from '../objects/obstacle.js';
 import { GameUI } from '../ui/gameUI.js';
 import { ObjectSpawner } from './objectSpawner.js';
+import { SoundManager } from './soundManager.js';
 
 export class Game {
   constructor() {
@@ -12,7 +13,6 @@ export class Game {
     this.objects = [];
     this.punctuation = 0;
     this.lives = 3;
-    this.eatSound = new Audio('assets/sounds/crunch.wav');
     this.maxCoins = 50;
     this.totalCoinsSpawned = 0;
     this.totalCoinsCollected = 0;
@@ -24,6 +24,9 @@ export class Game {
     this.spawner = new ObjectSpawner(this);
     this.spawner.start();
     this.gameLoop();
+
+    this.soundManager = new SoundManager();
+    this.soundManager.play('background');
   }
 
   createScenario() {
@@ -44,8 +47,7 @@ export class Game {
 
       if (this.character.collideWith(object)) {
         if (object instanceof Coin) {
-          this.eatSound.currentTime = 0;
-          this.eatSound.play();
+          this.soundManager.play('eat');
 
           if (this.container.contains(object.element)) {
             this.container.removeChild(object.element);
@@ -57,6 +59,7 @@ export class Game {
           this.ui.updateScore(this.punctuation);
         } else if (object instanceof Obstacle) {
           this.lives--;
+          this.soundManager.play('hit');
           if (this.lives <= 0) this.gameOver();
           this.objects.splice(index, 1);
         }
@@ -82,6 +85,7 @@ export class Game {
     });
 
     this.objects = [];
+    this.soundManager.play('gameOver');
     this.ui.showGameOverScreen(
       this.punctuation,
       this.lives,
@@ -110,6 +114,7 @@ export class Game {
     this.container.appendChild(this.character.element);
 
     this.spawner.start();
+    this.soundManager.play('background');
   }
 
   gameLoop() {
