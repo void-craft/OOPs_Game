@@ -1,0 +1,16 @@
+.character {
+  position: absolute;
+  left: 80px;
+  top: 80px;
+  width: 80px;
+  height: 80px;
+  background-image: url(../../../assets/img/octopus.png);
+  background-size: cover;
+  z-index: 9;
+  transition: transform 0.1s ease-in-out, background-size 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    background-size: 90%;
+  }
+}

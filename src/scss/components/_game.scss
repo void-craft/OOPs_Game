@@ -1,0 +1,45 @@
+.main {
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80vh;
+  gap: 10px;
+  padding: 0;
+
+  &__scoreboard {
+    font-size: 28px;
+    font-weight: bold;
+    color: #f39c12;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+
+    &__score {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    &:hover {
+      color: #f39c12;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+  }
+
+  &__container {
+    position: relative;
+    width: 60%;
+    height: 80%;
+    border: 10px solid #f39c12;
+    background-image: url(../../assets/img/game_background.jpg);
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
