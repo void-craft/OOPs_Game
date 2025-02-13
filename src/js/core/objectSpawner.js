@@ -50,16 +50,16 @@ export class ObjectSpawner {
     if (object && object.element) {
       this.container.appendChild(object.element);
       this.game.objects.push(object);
-    }
 
-    setTimeout(() => {
-      if (this.game.isGameOver) return;
-      if (this.game.objects.includes(object)) {
-        if (object.element && this.container.contains(object.element)) {
-          this.container.removeChild(object.element);
+      setTimeout(() => {
+        if (this.game.isGameOver) return;
+        if (this.game.objects.includes(object)) {
+          if (object.element && this.container.contains(object.element)) {
+            this.container.removeChild(object.element);
+          }
+          this.game.objects.splice(this.game.objects.indexOf(object), 1);
         }
-        this.game.objects.splice(this.game.objects.indexOf(object), 1);
-      }
-    }, lifespan);
+      }, lifespan);
+    }
   }
 }

@@ -1,66 +1,93 @@
 @import "../base/imagePaths";
 
-.main__sound-controls {
+// Variables
+$button-size: 50px;
+$slider-width: 100px;
+$slider-height: 5px;
+$slider-thumb-size: 20px;
+$slider-thumb-bg: #4CAF50;
+$slider-bg: #ddd;
+
+// Mixin for button styling
+@mixin mute-button($bg-image, $muted-bg-image) {
+  background: url($bg-image) no-repeat center;
+  width: $button-size;
+  height: $button-size;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &.muted {
+    background: url($muted-bg-image) no-repeat center;
+  }
+}
+
+// Mixin for volume slider styling
+@mixin volume-slider {
+  width: $slider-width;
+  height: $slider-height;
+  background: $slider-bg;
+  border-radius: 5px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+// Main sound container
+.main__sound {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
 }
 
-.main__sound-controls__group {
+// Music and effect sections
+.main__sound--music,
+.main__sound--effect {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.main__sound-controls__group--bg,
-.main__sound-controls__group--effects {
   flex-direction: row;
 }
 
-.main__sound-controls__mute-button {
-  background-size: cover;
-  width: 50px;
-  height: 50px;
-  border: none;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
+// Mute buttons
+.main__sound--music__mute-button {
+  @include mute-button($music-on-img, $music-off-img);
 }
 
-.main__sound-controls__mute-button--bg {
-  background: url($music-on-img) no-repeat center;
+.main__sound--effect__mute-button {
+  @include mute-button($effect-on-img, $effect-off-img);
 }
 
-.main__sound-controls__mute-button--bg.muted {
-  background: url($music-off-img) no-repeat center;
+// Sliders
+.main__sound--music__slider,
+.main__sound--effect__slider {
+  display: flex;
+  align-items: center;
 }
 
-.main__sound-controls__mute-button--effects {
-  background: url($effect-on-img) no-repeat center;
-}
-
-.main__sound-controls__mute-button--effects.muted {
-  background: url($effect-off-img) no-repeat center;
-}
-
-.main__sound-controls__volume-slider {
-  width: 100px;
-}
-
-.main__sound-controls__volume-input {
+// Volume input styling
+.main__sound--volume-input {
+  @include volume-slider;
   width: 100%;
-  height: 5px;
-  background: #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  margin: 0;
+  padding: 0;
 
-.main__sound-controls__volume-input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #4CAF50;
-  cursor: pointer;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    background: $slider-thumb-bg;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    background: $slider-thumb-bg;
+    cursor: pointer;
+  }
 }

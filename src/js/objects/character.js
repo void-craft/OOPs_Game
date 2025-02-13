@@ -22,14 +22,13 @@ export class Character {
     const container = document.querySelector('.main__container');
     const containerWidth = container.offsetWidth;
 
-    let moved = false;
-
     if (event.key === 'ArrowRight') {
-      this.x = Math.min(this.x + this.velocity, containerWidth - this.width - 15);
-      moved = true;
+      this.x = Math.min(
+        this.x + this.velocity,
+        containerWidth - this.width - 15
+      );
     } else if (event.key === 'ArrowLeft') {
       this.x = Math.max(this.x - this.velocity, 0);
-      moved = true;
     } else if (event.key === 'ArrowUp') {
       this.jump();
     }
@@ -42,10 +41,10 @@ export class Character {
       this.yVelocity = this.jumpCount === 2 ? -20 : -10;
       this.isJumping = true;
       this.jumpCount++;
-      
+
       const bubbleX = this.x + this.width / 2 - 10;
       const bubbleY = this.y + this.height - 10;
-      
+
       for (let i = 0; i < 3; i++) {
         let randomX = bubbleX + Math.random() * 30 - 15;
         let randomY = bubbleY + Math.random() * 30 - 15;
@@ -82,15 +81,14 @@ export class Character {
   }
 
   collideWith(object) {
-  const charRect = this.element.getBoundingClientRect();
-  const objRect = object.element.getBoundingClientRect();
+    const charRect = this.element.getBoundingClientRect();
+    const objRect = object.element.getBoundingClientRect();
 
-  return !(
-    charRect.right < objRect.left ||
-    charRect.left > objRect.right ||
-    charRect.bottom < objRect.top ||
-    charRect.top > objRect.bottom
-  );
-}
-
+    return !(
+      charRect.right < objRect.left ||
+      charRect.left > objRect.right ||
+      charRect.bottom < objRect.top ||
+      charRect.top > objRect.bottom
+    );
+  }
 }

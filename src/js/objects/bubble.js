@@ -11,17 +11,24 @@ export class Bubble {
     this.element.style.height = `${this.size}px`;
 
     const container = document.querySelector('.main__container');
-    container.appendChild(this.element);
+    if (container) {
+      container.appendChild(this.element);
 
-    setTimeout(() => {
-      this.element.style.transition = 'transform 2s ease-out, opacity 2s ease-out';
-      this.element.style.transform = `translateY(-100px)`;
-      this.element.style.opacity = '0';
-    }, 10);
+      this.element.animate(
+        [
+          { transform: 'translateY(0)', opacity: 1 },
+          { transform: 'translateY(-100px)', opacity: 0 }
+        ],
+        {
+          duration: 2000,
+          easing: 'ease-out'
+        }
+      );
 
-    setTimeout(() => {
-      this.element.remove();
-    }, 2000);
+      setTimeout(() => {
+        this.element.remove();
+      }, 2000);
+    }
   }
 
   updatePosition() {
@@ -29,4 +36,3 @@ export class Bubble {
     this.element.style.top = `${this.y}px`;
   }
 }
-

@@ -1,8 +1,7 @@
 @import '../base/imagePaths';
-@import '../base/soundControl';
+@import '../components/soundControl';
 
 .main {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +9,7 @@
   width: 100%;
   height: 80vh;
   gap: 2%;
-  padding: 0;
+  padding: 1%;
 
   &__scoreboard {
     font-size: 28px;
