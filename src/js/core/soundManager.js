@@ -78,13 +78,13 @@ export class SoundManager {
 
   muteEffects() {
     this.effectsMuted = !this.effectsMuted;
+    // Do not play any sounds when toggling mute/unmute
     Object.values(this.sounds).forEach(sound => {
       if (sound !== this.sounds.background) {
         if (this.effectsMuted) {
-          sound.pause();
-        } else {
-          sound.play().catch(e => console.warn("Sound effect playback failed:", e));
+          sound.pause(); // Pause all sound effects if muted
         }
+        // Do not play sounds when unmuting
       }
     });
   }

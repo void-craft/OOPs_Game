@@ -2,13 +2,17 @@ export class GameUI {
   constructor(soundManager) {
     // Start Screen Elements
     this.startScreen = document.querySelector('.start-screen');
-    this.playButton = document.querySelector('.start-screen .game-over__restart-button');
+    this.playButton = document.querySelector(
+      '.start-screen .game-over__restart-button'
+    );
     // Scoreboard Elements
     this.scoreboard = document.querySelector('.main__scoreboard__score');
     this.livesElement = document.querySelector('.main__scoreboard__lives');
     // Game Over Elements
     this.overlay = document.querySelector('.game-over:not(.start-screen)');
-    this.restartButton = document.querySelector('.game-over:not(.start-screen) .game-over__restart-button');
+    this.restartButton = document.querySelector(
+      '.game-over:not(.start-screen) .game-over__restart-button'
+    );
     this.finalScore = document.querySelector('.game-over__final-score');
     this.finalLives = document.querySelector('.game-over__final-lives');
     this.finalCoins = document.querySelector('.game-over__final-coins');
@@ -22,25 +26,33 @@ export class GameUI {
 
     // Add event listeners if elements exist
     if (this.muteBackgroundButton) {
-      this.muteBackgroundButton.addEventListener('click', () => this.toggleMuteBackground());
+      this.muteBackgroundButton.addEventListener('click', () =>
+        this.toggleMuteBackground()
+      );
     } else {
       console.error('Mute background button not found.');
     }
 
     if (this.volumeBackgroundSlider) {
-      this.volumeBackgroundSlider.addEventListener('input', (e) => this.adjustVolumeBackground(e));
+      this.volumeBackgroundSlider.addEventListener('input', (e) =>
+        this.adjustVolumeBackground(e)
+      );
     } else {
       console.error('Volume background slider not found.');
     }
 
     if (this.muteEffectsButton) {
-      this.muteEffectsButton.addEventListener('click', () => this.toggleMuteEffects());
+      this.muteEffectsButton.addEventListener('click', () =>
+        this.toggleMuteEffects()
+      );
     } else {
       console.error('Mute effects button not found.');
     }
 
     if (this.volumeEffectsSlider) {
-      this.volumeEffectsSlider.addEventListener('input', (e) => this.adjustVolumeEffects(e));
+      this.volumeEffectsSlider.addEventListener('input', (e) =>
+        this.adjustVolumeEffects(e)
+      );
     } else {
       console.error('Volume effects slider not found.');
     }
@@ -56,7 +68,6 @@ export class GameUI {
 
   toggleMuteBackground() {
     this.soundManager.muteBg();
-    // Change button appearance based on mute state
     if (this.soundManager.bgMuted) {
       this.muteBackgroundButton.classList.add('muted');
     } else {
@@ -118,9 +129,11 @@ export class GameUI {
   showGameOverScreen(score, lives, coins) {
     if (this.overlay) {
       this.overlay.style.display = 'flex';
-      if (this.finalScore) this.finalScore.textContent = `Final Score: ${score}`;
+      if (this.finalScore)
+        this.finalScore.textContent = `Final Score: ${score}`;
       if (this.finalLives) this.finalLives.textContent = `Lives Left: ${lives}`;
-      if (this.finalCoins) this.finalCoins.textContent = `Coins Collected: ${coins}`;
+      if (this.finalCoins)
+        this.finalCoins.textContent = `Coins Collected: ${coins}`;
     } else {
       console.error('Game over overlay not found.');
     }
