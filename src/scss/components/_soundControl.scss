@@ -20,7 +20,7 @@
 @mixin volume-slider {
   width: $slider-width;
   height: $slider-height;
-  background: $slider-bg;
+  background: $secondary-color;
   border-radius: 5px;
   cursor: pointer;
   appearance: none;
@@ -67,7 +67,7 @@
     width: $slider-thumb-size;
     height: $slider-thumb-size;
     border-radius: 50%;
-    background: $slider-thumb-bg;
+    background: $primary-color;
     cursor: pointer;
   }
 
@@ -75,7 +75,7 @@
     width: $slider-thumb-size;
     height: $slider-thumb-size;
     border-radius: 50%;
-    background: $slider-thumb-bg;
+    background: $primary-color;
     cursor: pointer;
   }
 }

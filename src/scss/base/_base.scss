@@ -1,10 +1,10 @@
 .game {
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: linear-gradient(to top, $background-color-top 0%, $background-color-bottom 100%);
+  font-family: $body-font-family;
   overflow: hidden;
-  color: #ecf0f1;
+  color: $body-text-color;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

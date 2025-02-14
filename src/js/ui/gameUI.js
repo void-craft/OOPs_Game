@@ -2,9 +2,7 @@ export class GameUI {
   constructor(soundManager) {
     // Start Screen Elements
     this.startScreen = document.querySelector('.start-screen');
-    this.playButton = document.querySelector(
-      '.start-screen .game-over__restart-button'
-    );
+    this.playButton = document.querySelector('.start-screen .start-screen__play-button');
     // Scoreboard Elements
     this.scoreboard = document.querySelector('.main__scoreboard__score');
     this.livesElement = document.querySelector('.main__scoreboard__lives');

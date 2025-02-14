@@ -1,11 +1,13 @@
-@import 'components/game';
-@import 'components/character';
 @import 'components/coin';
+@import 'components/character';
 @import 'components/bubble';
+@import 'components/game';
 @import 'components/obstacle';
-@import 'components/gameOver';
 @import 'components/soundControl'; 
-@import 'base/base';
-@import 'base/keyframes';
-@import 'base/imagePaths';
 
+@import 'base/base';
+@import 'base/gameOver';
+@import 'base/imagePaths';
+@import 'base/keyframes';
+@import 'base/startScreen';
+@import 'base/variables';

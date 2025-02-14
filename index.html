@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="./src/scss/main.css" />
   <script type="module" src="./src/js/main.js" defer></script>
   <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
 </head>
 
 <body class="game">
@@ -20,26 +25,28 @@
     </section>
 
     <section class="main__sound">
-  <div class="main__sound--music">
-    <button class="main__sound--music__mute-button" id="mute-background"></button>
-    <div class="main__sound--music__slider">
-      <input type="range" class="main__sound--volume-input" id="volume-background" min="0" max="1" step="0.01" value="1">
-    </div>
-  </div>
-  <div class="main__sound--effect">
-    <button class="main__sound--effect__mute-button" id="mute-effects"></button>
-    <div class="main__sound--effect__slider">
-      <input type="range" class="main__sound--volume-input" id="volume-effects" min="0" max="1" step="0.01" value="1">
-    </div>
-  </div>
-</section>
+      <div class="main__sound--music">
+        <button class="main__sound--music__mute-button" id="mute-background"></button>
+        <div class="main__sound--music__slider">
+          <input type="range" class="main__sound--volume-input" id="volume-background" min="0" max="1" step="0.01"
+            value="1">
+        </div>
+      </div>
+      <div class="main__sound--effect">
+        <button class="main__sound--effect__mute-button" id="mute-effects"></button>
+        <div class="main__sound--effect__slider">
+          <input type="range" class="main__sound--volume-input" id="volume-effects" min="0" max="1" step="0.01"
+            value="1">
+        </div>
+      </div>
+    </section>
 
     <section class="main__container" aria-label="Game Area"></section>
 
     <!-- Start Screen Overlay -->
-<div class="game-over start-screen">
+<div class="start-screen">
   <h1>Welcome to Adventure San Cris!</h1>
-  <button class="game-over__restart-button">Play</button>
+  <button class="start-screen__play-button">Play</button>
 </div>
 
 <!-- Game Over Overlay -->

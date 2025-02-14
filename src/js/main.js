@@ -1,6 +1,6 @@
 import { Game } from './core/game.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.game-over').style.display = 'none';
+  document.querySelector('.start-screen').style.display = 'none';
   const game = new Game();
 });

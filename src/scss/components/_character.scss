@@ -8,6 +8,7 @@
   height: 80px;
   background-image: $character-img;
   background-size: cover;
+  background-repeat: no-repeat;
   z-index: 9;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;
 

@@ -1,4 +1,5 @@
 @import '../base/imagePaths';
+@import '../base/variables'; // Import your SCSS variables
 @import '../components/soundControl';
 
 .main {
@@ -12,17 +13,16 @@
   padding: 1%;
 
   &__scoreboard {
-    font-size: 28px;
+    font-size: $scoreboard-font-size;
     font-weight: bold;
-    color: #f39c12;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    color: $secondary-color;
 
     &__score, &__lives {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: $body-font-family;
     }
 
     &:hover {
-      color: #f39c12;
+      color: $primary-color;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       transform: scale(1.1);
       transition: all 0.3s ease;
@@ -30,18 +30,17 @@
   }
 
   &__container {
-    position: relative;
-    width: 55%;
-    height: 80%;
-    border: 10px solid #f39c12;
-    background-image: $gameBg-img;
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    border-radius: 30px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: relative;
+  width: 55%;
+  height: 80%;
+  background-image: $gameBg-img;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 20px 5px $secondary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 }

@@ -1,6 +1,39 @@
-$button-size: 30px;
-$slider-width: 20px;
-$slider-height: 5px;
-$slider-thumb-size: 15px;
-$slider-thumb-bg: #d15cd9;
-$slider-bg: #ddd;
+// Colors
+$primary-color: #330867; // Primary color for the theme
+$secondary-color: white; // Secondary color, usually for backgrounds or lighter text
+$background-color-top: #30cfd0; // Top gradient background color
+$background-color-bottom: #330867; // Bottom gradient background color
+$text-color: #ecf0f1; // Text color (light for contrast)
+
+// Font
+$header-font-family: "Macondo", serif; // Changed font to Poppins for headers
+$header-font-size: 36px; // Font size for headers
+$header-font-weight: bold; // Font weight for headers
+$header-text-color: $primary-color;
+$scoreboard-font-size: 28px;
+
+$body-font-family: "Caveat", sans-serif; // Font family for body text
+$body-font-size: 16px; // Font size for body text
+$body-font-weight: normal; // Font weight for body text
+$body-text-color: $text-color; // Body text color
+
+// Button and Slider sizes
+$button-size: 30px; // Button size
+$button-font-size: 14px; // Font size for button text
+$button-bg-color: $primary-color; // Button background color
+$button-border-radius: 5px; // Button border radius
+
+$slider-width: 20px; // Slider width
+$slider-height: 5px; // Slider height
+$slider-thumb-size: 15px; // Slider thumb size
+$slider-thumb-bg: #d15cd9; // Slider thumb background color
+$slider-bg: #ddd; // Slider background color
+
+// Card or container dimensions (optional)
+$card-padding: 20px; // Padding for cards or containers
+$card-border-radius: 12px; // Slightly higher radius for the glow effect
+
+// Miscellaneous
+$border-color: #ccc; // Border color for elements like input fields
+$shadow-color: rgba(0, 0, 0, 0.1); // Shadow color for soft shadows
+$glow-effect: 0px 0px 15px $secondary-color; // Glowing effect around the container
