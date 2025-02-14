@@ -1,13 +1,6 @@
 @import "../base/imagePaths";
+@import "../base/variables";
 
-$button-size: 50px;
-$slider-width: 100px;
-$slider-height: 5px;
-$slider-thumb-size: 20px;
-$slider-thumb-bg: #4CAF50;
-$slider-bg: #ddd;
-
-// Mixin for button styling
 @mixin mute-button($bg-image, $muted-bg-image) {
   background: $bg-image no-repeat center;
   background-size: cover;
@@ -20,11 +13,10 @@ $slider-bg: #ddd;
 
   &.muted {
     background: $muted-bg-image no-repeat center;
-    background-size: cover; // Ensure the muted image also covers the button
+    background-size: cover;
   }
 }
 
-// Mixin for volume slider styling
 @mixin volume-slider {
   width: $slider-width;
   height: $slider-height;
@@ -35,7 +27,6 @@ $slider-bg: #ddd;
   -webkit-appearance: none;
 }
 
-// Main sound container
 .main__sound {
   display: flex;
   justify-content: center;
@@ -43,7 +34,6 @@ $slider-bg: #ddd;
   gap: 20px;
 }
 
-// Music and effect sections
 .main__sound--music,
 .main__sound--effect {
   display: flex;
@@ -52,7 +42,6 @@ $slider-bg: #ddd;
   flex-direction: row;
 }
 
-// Mute buttons
 .main__sound--music__mute-button {
   @include mute-button($music-on-img, $music-off-img);
 }
@@ -61,14 +50,12 @@ $slider-bg: #ddd;
   @include mute-button($effect-on-img, $effect-off-img);
 }
 
-// Sliders
 .main__sound--music__slider,
 .main__sound--effect__slider {
   display: flex;
   align-items: center;
 }
 
-// Volume input styling
 .main__sound--volume-input {
   @include volume-slider;
   width: 100%;
