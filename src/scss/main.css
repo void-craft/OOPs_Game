@@ -265,6 +265,8 @@
 .game {
   margin: 0;
   padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   overflow: hidden;
   display: flex;
