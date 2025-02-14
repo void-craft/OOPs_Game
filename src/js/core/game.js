@@ -8,7 +8,8 @@ import { SoundManager } from './soundManager.js';
 export class Game {
   constructor() {
     this.container = document.querySelector('.main__container');
-    this.ui = new GameUI();
+    this.soundManager = new SoundManager();
+    this.ui = new GameUI(this.soundManager);
     this.character = null;
     this.objects = [];
     this.punctuation = 0;
@@ -25,7 +26,6 @@ export class Game {
     this.createScenario();
 
     this.spawner = new ObjectSpawner(this);
-    this.soundManager = new SoundManager();
     this.soundManager.play('background');
 
     this.ui.playButton.addEventListener('click', () => {
@@ -51,7 +51,6 @@ export class Game {
   addEvents() {
     window.removeEventListener('keydown', this.handleKeyDown);
     window.addEventListener('keydown', this.handleKeyDown);
-    // window.addEventListener('keydown', (e) => this.character.move(e));
     this.ui.addRestartListener(() => this.restartGame());
   }
 
@@ -158,8 +157,4 @@ export class Game {
       this.totalCoinsCollected
     );
   }
-
-  
-
-  
 }
