@@ -16,10 +16,10 @@ export class SoundManager {
     this.effectsMuted = false;
     this.bgVolume = 1;
     this.effectsVolume = 1;
-
     this.sounds.background.volume = this.bgVolume;
+
     Object.values(this.sounds).forEach(sound => {
-      if (sound !== this.sounds.background) {
+      if (sound !== this.sounds.background && sound !== this.sounds.wait) {
         sound.volume = this.effectsVolume;
       }
     });
@@ -61,12 +61,13 @@ export class SoundManager {
   setBgVolume(volume) {
     this.bgVolume = volume;
     this.sounds.background.volume = volume;
+    this.sounds.wait.volume = volume;
   }
 
   setEffectsVolume(volume) {
     this.effectsVolume = volume;
     Object.values(this.sounds).forEach(sound => {
-      if (sound !== this.sounds.background) {
+      if (sound !== this.sounds.background && sound !== this.sounds.wait) {
         sound.volume = volume;
       }
     });
@@ -76,15 +77,19 @@ export class SoundManager {
     this.bgMuted = !this.bgMuted;
     if (this.bgMuted) {
       this.sounds.background.pause();
+      this.sounds.wait.pause();
     } else {
-      this.sounds.background.play().catch(e => console.warn("Background music playback failed:", e));
-    }
-  }
+      if (this.sounds.wait.currentTime > 0) {
+        this.sounds.wait.play().catch(e => console.warn("Wait sound playback failed:", e));
+      } else {
+        this.sounds.background.play().catch(e => console.warn("Background music playback failed:", e));
+      }
+    }  }
 
   muteEffects() {
     this.effectsMuted = !this.effectsMuted;
     Object.values(this.sounds).forEach(sound => {
-      if (sound !== this.sounds.background) {
+      if (sound !== this.sounds.background && sound !== this.sounds.wait) {
         if (this.effectsMuted) {
           sound.pause();
         } else {
@@ -97,13 +102,16 @@ export class SoundManager {
   gameOver() {
     this.stop('background');
     this.play('gameOver');
-    this.sounds.wait.loop = true;
     this.play('wait');
+  }
+
+  startGame() {
+    this.stop('wait');
+    this.play('background');
   }
 
   maxCoins() {
     this.stop('background');
-    this.sounds.wait.loop = true;
     this.play('wait');
   }
 }

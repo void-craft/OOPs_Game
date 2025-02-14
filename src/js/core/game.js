@@ -23,10 +23,9 @@ export class Game {
 
     this.ui.hideGameOverScreen();
     this.ui.showStartScreen();
-    this.createScenario();
 
+    this.createScenario();
     this.spawner = new ObjectSpawner(this);
-    this.soundManager.play('background');
 
     this.ui.playButton.addEventListener('click', () => {
       this.startGame();
@@ -38,28 +37,25 @@ export class Game {
   startGame() {
     this.isGameStarted = true;
     this.ui.hideStartScreen();
+    this.soundManager.startGame();
     this.spawner.start();
     this.addEvents();
     this.gameLoop();
   }
 
-  createScenario() {
-    this.character = new Character();
-    this.container.appendChild(this.character.element);
-  }
+  gameOver() {
+    this.isGameOver = true;
+    this.spawner.stop();
+    this.soundManager.gameOver();
 
-  addEvents() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('keydown', this.handleKeyDown);
-    this.ui.addRestartListener(() => this.restartGame());
-  }
+    this.objects.forEach((obj) => this.removeObjectFromDOM(obj));
+    this.objects = [];
 
-  gameLoop() {
-    if (this.isGameOver) return;
-
-    this.character.applyGravity();
-    this.checkCollisions();
-    requestAnimationFrame(() => this.gameLoop());
+    this.ui.showGameOverScreen(
+      this.punctuation,
+      this.lives,
+      this.totalCoinsCollected
+    );
   }
 
   restartGame() {
@@ -83,9 +79,28 @@ export class Game {
     this.container.appendChild(this.character.element);
 
     this.spawner.start();
-    this.soundManager.play('background');
+    this.soundManager.startGame(); 
     this.addEvents();
     this.gameLoop();
+  }
+
+  createScenario() {
+    this.character = new Character();
+    this.container.appendChild(this.character.element);
+  }
+
+  addEvents() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown);
+    this.ui.addRestartListener(() => this.restartGame());
+  }
+
+  gameLoop() {
+    if (this.isGameOver) return;
+
+    this.character.applyGravity();
+    this.checkCollisions();
+    requestAnimationFrame(() => this.gameLoop());
   }
 
   checkCollisions() {
@@ -141,20 +156,5 @@ export class Game {
     if (object.element && this.container.contains(object.element)) {
       this.container.removeChild(object.element);
     }
-  }
-
-  gameOver() {
-    this.isGameOver = true;
-    this.spawner.stop();
-    this.soundManager.stop('background');
-
-    this.objects.forEach((obj) => this.removeObjectFromDOM(obj));
-    this.objects = [];
-
-    this.ui.showGameOverScreen(
-      this.punctuation,
-      this.lives,
-      this.totalCoinsCollected
-    );
   }
 }

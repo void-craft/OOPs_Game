@@ -19,8 +19,6 @@ export class GameUI {
     this.muteEffectsButton = document.getElementById('mute-effects');
     this.volumeEffectsSlider = document.getElementById('volume-effects');
 
-    this.soundManager = soundManager;
-
     // Add event listeners if elements exist
     if (this.muteBackgroundButton) {
       this.muteBackgroundButton.addEventListener('click', () =>
