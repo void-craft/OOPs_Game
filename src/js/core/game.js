@@ -18,6 +18,7 @@ export class Game {
     this.totalCoinsCollected = 0;
     this.isGameOver = false;
     this.isGameStarted = false;
+    this.isGameLoopOn = false;
 
     this.ui.hideGameOverScreen();
     this.ui.showStartScreen();
@@ -30,6 +31,8 @@ export class Game {
     this.ui.playButton.addEventListener('click', () => {
       this.startGame();
     });
+
+    this.handleKeyDown = (e) => this.character.move(e);
   }
 
   startGame() {
@@ -46,8 +49,44 @@ export class Game {
   }
 
   addEvents() {
-    window.addEventListener('keydown', (e) => this.character.move(e));
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown);
+    // window.addEventListener('keydown', (e) => this.character.move(e));
     this.ui.addRestartListener(() => this.restartGame());
+  }
+
+  gameLoop() {
+    if (this.isGameOver) return;
+
+    this.character.applyGravity();
+    this.checkCollisions();
+    requestAnimationFrame(() => this.gameLoop());
+  }
+
+  restartGame() {
+    this.isGameOver = false;
+    this.isGameStarted = true;
+    this.ui.hideGameOverScreen();
+    this.punctuation = 0;
+    this.totalCoinsSpawned = 0;
+    this.totalCoinsCollected = 0;
+    this.lives = 3;
+    this.ui.updateLives(this.lives);
+    this.ui.updateScore(0);
+
+    this.objects.forEach((object) => this.removeObjectFromDOM(object));
+    this.objects = [];
+
+    if (this.character && this.character.element) {
+      this.container.removeChild(this.character.element);
+    }
+    this.character = new Character();
+    this.container.appendChild(this.character.element);
+
+    this.spawner.start();
+    this.soundManager.play('background');
+    this.addEvents();
+    this.gameLoop();
   }
 
   checkCollisions() {
@@ -74,11 +113,6 @@ export class Game {
     }
   }
 
-  /**
-   * Handles collision with a coin.
-   * @param {Coin} coin - The coin object.
-   * @param {number} index - The index of the coin in the objects array.
-   */
   handleCoinCollision(coin, index) {
     this.soundManager.play('eat');
     this.removeObjectFromDOM(coin);
@@ -88,29 +122,22 @@ export class Game {
     this.ui.updateScore(this.punctuation);
   }
 
-  /**
-   * Handles collision with an obstacle.
-   * @param {number} index - The index of the obstacle in the objects array.
-   */
   handleObstacleCollision(index) {
     this.lives--;
-    this.soundManager.play('hit'); // Play "hit" sound for losing a life
+    this.soundManager.play('hit');
+    this.ui.updateLives(this.lives);
 
     if (this.lives <= 0) {
-      this.soundManager.play('gameOver'); // Play "game over" sound when no lives are left
+      this.soundManager.play('gameOver');
       this.gameOver();
     } else {
-      this.soundManager.play('hit'); // Play "hit" sound if lives are still remaining
+      this.soundManager.play('hit');
     }
 
     this.removeObjectFromDOM(this.objects[index]);
     this.objects.splice(index, 1);
   }
 
-  /**
-   * Removes an object from the DOM.
-   * @param {Object} object - The game object to remove.
-   */
   removeObjectFromDOM(object) {
     if (object.element && this.container.contains(object.element)) {
       this.container.removeChild(object.element);
@@ -132,36 +159,7 @@ export class Game {
     );
   }
 
-  restartGame() {
-    this.isGameOver = false;
-    this.isGameStarted = true;
-    this.ui.hideGameOverScreen();
-    this.punctuation = 0;
-    this.totalCoinsSpawned = 0;
-    this.totalCoinsCollected = 0;
-    this.lives = 3;
-    this.ui.updateScore(0);
+  
 
-    this.objects.forEach((object) => this.removeObjectFromDOM(object));
-    this.objects = [];
-
-    if (this.character && this.character.element) {
-      this.container.removeChild(this.character.element);
-    }
-    this.character = new Character();
-    this.container.appendChild(this.character.element);
-
-    this.spawner.start();
-    this.soundManager.play('background');
-    this.addEvents();
-    this.gameLoop();
-  }
-
-  gameLoop() {
-    if (this.isGameOver) return;
-
-    this.character.applyGravity();
-    this.checkCollisions();
-    requestAnimationFrame(() => this.gameLoop());
-  }
+  
 }

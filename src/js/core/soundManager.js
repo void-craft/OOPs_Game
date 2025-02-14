@@ -24,19 +24,12 @@ export class SoundManager {
     document.addEventListener("keydown", this.unlockAudio, { once: true });
   }
 
-  /**
-   * Unlocks audio playback on user interaction.
-   */
   unlockAudio() {
     this.sounds.background.play()
       .then(() => console.log("Audio Unlocked!"))
       .catch(e => console.warn("Audio Unlock Failed:", e));
   }
 
-  /**
-   * Plays a sound.
-   * @param {string} sound - The key of the sound to play.
-   */
   play(sound) {
     if (!this.sounds[sound]) {
       console.warn(`Sound "${sound}" not found.`);
@@ -53,10 +46,6 @@ export class SoundManager {
     this.sounds[sound].play().catch(e => console.warn(`Playback error for "${sound}":`, e));
   }
 
-  /**
-   * Stops a sound.
-   * @param {string} sound - The key of the sound to stop.
-   */
   stop(sound) {
     if (this.sounds[sound]) {
       this.sounds[sound].pause();
@@ -64,19 +53,11 @@ export class SoundManager {
     }
   }
 
-  /**
-   * Sets the volume for background music.
-   * @param {number} volume - The volume level (0 to 1).
-   */
   setBgVolume(volume) {
     this.bgVolume = volume;
     this.sounds.background.volume = volume;
   }
 
-  /**
-   * Sets the volume for sound effects.
-   * @param {number} volume - The volume level (0 to 1).
-   */
   setEffectsVolume(volume) {
     this.effectsVolume = volume;
     Object.values(this.sounds).forEach(sound => {

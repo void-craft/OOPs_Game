@@ -10,6 +10,7 @@ export class ObjectSpawner {
   }
 
   start() {
+    this.stop();
     this.coinSpawner = setInterval(() => {
       if (
         this.game.isGameOver ||

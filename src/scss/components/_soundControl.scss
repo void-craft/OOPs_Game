@@ -1,6 +1,5 @@
 @import "../base/imagePaths";
 
-// Variables
 $button-size: 50px;
 $slider-width: 100px;
 $slider-height: 5px;
@@ -10,7 +9,8 @@ $slider-bg: #ddd;
 
 // Mixin for button styling
 @mixin mute-button($bg-image, $muted-bg-image) {
-  background: url($bg-image) no-repeat center;
+  background: $bg-image no-repeat center;
+  background-size: cover;
   width: $button-size;
   height: $button-size;
   border: none;
@@ -19,7 +19,8 @@ $slider-bg: #ddd;
   -webkit-appearance: none;
 
   &.muted {
-    background: url($muted-bg-image) no-repeat center;
+    background: $muted-bg-image no-repeat center;
+    background-size: cover; // Ensure the muted image also covers the button
   }
 }
 

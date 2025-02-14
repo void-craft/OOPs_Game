@@ -3,20 +3,20 @@ export class GameUI {
     // Start Screen Elements
     this.startScreen = document.querySelector('.start-screen');
     this.playButton = document.querySelector('.start-screen .game-over__restart-button');
-
+    // Scoreboard Elements
+    this.scoreboard = document.querySelector('.main__scoreboard__score');
+    this.livesElement = document.querySelector('.main__scoreboard__lives');
     // Game Over Elements
     this.overlay = document.querySelector('.game-over:not(.start-screen)');
     this.restartButton = document.querySelector('.game-over:not(.start-screen) .game-over__restart-button');
     this.finalScore = document.querySelector('.game-over__final-score');
     this.finalLives = document.querySelector('.game-over__final-lives');
     this.finalCoins = document.querySelector('.game-over__final-coins');
-
     // Background music and sound effects controls
     this.muteBackgroundButton = document.getElementById('mute-background');
     this.volumeBackgroundSlider = document.getElementById('volume-background');
     this.muteEffectsButton = document.getElementById('mute-effects');
     this.volumeEffectsSlider = document.getElementById('volume-effects');
-
     // Initialize sound manager
     this.soundManager = soundManager;
 
@@ -45,7 +45,6 @@ export class GameUI {
       console.error('Volume effects slider not found.');
     }
 
-    // Add event listener for the play button
     if (this.playButton) {
       this.playButton.addEventListener('click', () => {
         this.hideStartScreen();
@@ -55,9 +54,6 @@ export class GameUI {
     }
   }
 
-  /**
-   * Toggles the mute state of background music.
-   */
   toggleMuteBackground() {
     this.soundManager.muteBg();
     // Change button appearance based on mute state
@@ -68,9 +64,6 @@ export class GameUI {
     }
   }
 
-  /**
-   * Toggles the mute state of sound effects.
-   */
   toggleMuteEffects() {
     this.soundManager.muteEffects();
     if (this.soundManager.effectsMuted) {
@@ -80,28 +73,16 @@ export class GameUI {
     }
   }
 
-  /**
-   * Adjusts the volume of background music.
-   * @param {Event} e - The input event from the volume slider.
-   */
   adjustVolumeBackground(e) {
     const volume = parseFloat(e.target.value);
     this.soundManager.setBgVolume(volume);
   }
 
-  /**
-   * Adjusts the volume of sound effects.
-   * @param {Event} e - The input event from the volume slider.
-   */
   adjustVolumeEffects(e) {
     const volume = parseFloat(e.target.value);
     this.soundManager.setEffectsVolume(volume);
   }
 
-  /**
-   * Updates the score displayed on the scoreboard.
-   * @param {number} score - The new score to display.
-   */
   updateScore(score) {
     if (this.scoreboard) {
       this.scoreboard.textContent = `Score: ${score}`;
@@ -110,9 +91,14 @@ export class GameUI {
     }
   }
 
-  /**
-   * Shows the start screen overlay.
-   */
+  updateLives(lives) {
+    if (this.livesElement) {
+      this.livesElement.textContent = `Lives: ${lives}`;
+    } else {
+      console.error('Lives element not found.');
+    }
+  }
+
   showStartScreen() {
     if (this.startScreen) {
       this.startScreen.style.display = 'flex';
@@ -121,9 +107,6 @@ export class GameUI {
     }
   }
 
-  /**
-   * Hides the start screen overlay.
-   */
   hideStartScreen() {
     if (this.startScreen) {
       this.startScreen.style.display = 'none';
@@ -132,12 +115,6 @@ export class GameUI {
     }
   }
 
-  /**
-   * Displays the game over screen with final stats.
-   * @param {number} score - The final score.
-   * @param {number} lives - The remaining lives.
-   * @param {number} coins - The total coins collected.
-   */
   showGameOverScreen(score, lives, coins) {
     if (this.overlay) {
       this.overlay.style.display = 'flex';
@@ -149,9 +126,6 @@ export class GameUI {
     }
   }
 
-  /**
-   * Hides the game over screen.
-   */
   hideGameOverScreen() {
     if (this.overlay) {
       this.overlay.style.display = 'none';
@@ -160,10 +134,6 @@ export class GameUI {
     }
   }
 
-  /**
-   * Adds a click event listener to the restart button.
-   * @param {Function} callback - The function to call when the restart button is clicked.
-   */
   addRestartListener(callback) {
     if (this.restartButton) {
       this.restartButton.addEventListener('click', () => {
