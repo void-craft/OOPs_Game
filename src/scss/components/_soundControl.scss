@@ -1,0 +1,81 @@
+@import "../base/imagePaths";
+@import "../base/variables";
+
+@mixin mute-button($bg-image, $muted-bg-image) {
+  background: $bg-image no-repeat center;
+  background-size: cover;
+  width: $button-size;
+  height: $button-size;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &.muted {
+    background: $muted-bg-image no-repeat center;
+    background-size: cover;
+  }
+}
+
+@mixin volume-slider {
+  width: $slider-width;
+  height: $slider-height;
+  background: $secondary-color;
+  border-radius: 5px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.main__sound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.main__sound--music,
+.main__sound--effect {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.main__sound--music__mute-button {
+  @include mute-button($music-on-img, $music-off-img);
+}
+
+.main__sound--effect__mute-button {
+  @include mute-button($effect-on-img, $effect-off-img);
+}
+
+.main__sound--music__slider,
+.main__sound--effect__slider {
+  display: flex;
+  align-items: center;
+}
+
+.main__sound--volume-input {
+  @include volume-slider;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    background: $primary-color;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    background: $primary-color;
+    cursor: pointer;
+  }
+}

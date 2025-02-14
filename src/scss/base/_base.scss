@@ -1,0 +1,21 @@
+@import "../base/variables";
+@import "../base/imagePaths";
+
+.game {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to top, $background-color-top 0%, $background-color-bottom 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+
+  &__title {
+    font-family: $header-font-family;
+    color: $secondary-color;
+  }
+}
