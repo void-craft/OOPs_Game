@@ -8,17 +8,24 @@ export class SoundManager {
       background: new Audio('./assets/sounds/loop.mp3'),
       wait: new Audio('./assets/sounds/wait.mp3')
     };
+
     this.sounds.background.loop = true;
+    this.sounds.wait.loop = true;
+
     this.bgMuted = false;
     this.effectsMuted = false;
     this.bgVolume = 1;
     this.effectsVolume = 1;
+
     this.sounds.background.volume = this.bgVolume;
     Object.values(this.sounds).forEach(sound => {
       if (sound !== this.sounds.background) {
         sound.volume = this.effectsVolume;
       }
     });
+
+    this.play('wait');
+
     this.unlockAudio = this.unlockAudio.bind(this);
     document.addEventListener("click", this.unlockAudio, { once: true });
     document.addEventListener("keydown", this.unlockAudio, { once: true });
@@ -36,12 +43,10 @@ export class SoundManager {
       return;
     }
 
-    // Skip playback if muted
     if ((sound === 'background' && this.bgMuted) || (sound !== 'background' && this.effectsMuted)) {
       return;
     }
 
-    // Reset playback and play
     this.sounds[sound].currentTime = 0;
     this.sounds[sound].play().catch(e => console.warn(`Playback error for "${sound}":`, e));
   }
@@ -78,13 +83,13 @@ export class SoundManager {
 
   muteEffects() {
     this.effectsMuted = !this.effectsMuted;
-    // Do not play any sounds when toggling mute/unmute
     Object.values(this.sounds).forEach(sound => {
       if (sound !== this.sounds.background) {
         if (this.effectsMuted) {
-          sound.pause(); // Pause all sound effects if muted
+          sound.pause();
+        } else {
+          sound.play().catch(e => console.warn("Sound effect playback failed:", e));
         }
-        // Do not play sounds when unmuting
       }
     });
   }

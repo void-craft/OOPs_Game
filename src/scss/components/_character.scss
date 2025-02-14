@@ -4,10 +4,11 @@
   position: absolute;
   left: 80px;
   top: 80px;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
   background-image: $character-img;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   z-index: 9;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;

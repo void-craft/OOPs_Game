@@ -1,12 +1,11 @@
 export class GameUI {
   constructor(soundManager) {
-    // Start Screen Elements
+
     this.startScreen = document.querySelector('.start-screen');
     this.playButton = document.querySelector('.start-screen .start-screen__play-button');
-    // Scoreboard Elements
+
     this.scoreboard = document.querySelector('.main__scoreboard__score');
     this.livesElement = document.querySelector('.main__scoreboard__lives');
-    // Game Over Elements
     this.overlay = document.querySelector('.game-over:not(.start-screen)');
     this.restartButton = document.querySelector(
       '.game-over:not(.start-screen) .game-over__restart-button'
@@ -14,12 +13,12 @@ export class GameUI {
     this.finalScore = document.querySelector('.game-over__final-score');
     this.finalLives = document.querySelector('.game-over__final-lives');
     this.finalCoins = document.querySelector('.game-over__final-coins');
-    // Background music and sound effects controls
+
     this.muteBackgroundButton = document.getElementById('mute-background');
     this.volumeBackgroundSlider = document.getElementById('volume-background');
     this.muteEffectsButton = document.getElementById('mute-effects');
     this.volumeEffectsSlider = document.getElementById('volume-effects');
-    // Initialize sound manager
+
     this.soundManager = soundManager;
 
     // Add event listeners if elements exist
@@ -58,6 +57,8 @@ export class GameUI {
     if (this.playButton) {
       this.playButton.addEventListener('click', () => {
         this.hideStartScreen();
+        this.soundManager.stop('wait');
+        this.soundManager.play('background');
       });
     } else {
       console.error('Play button not found.');
