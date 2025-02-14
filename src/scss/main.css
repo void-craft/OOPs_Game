@@ -107,11 +107,12 @@
 }
 .main__container {
   position: relative;
-  width: 60%;
+  width: 55%;
   height: 80%;
   border: 10px solid #f39c12;
   background-image: url("../../assets/img/game_background.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
   overflow: hidden;
   border-radius: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
