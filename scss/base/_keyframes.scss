@@ -54,18 +54,29 @@
 
 @keyframes swimShark {
   0% {
-    transform: translateY(0); // Start at the normal position
+    transform: translateY(0);
   }
   25% {
-    transform: translateY(-5px); // Move slightly up
+    transform: translateY(-10px);
   }
   50% {
-    transform: translateY(0); // Back to normal
+    transform: translateY(0);
   }
   75% {
-    transform: translateY(5px); // Move slightly down
+    transform: translateY(10px);
   }
   100% {
-    transform: translateY(0); // Reset to the normal position
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatAndFlip {
+  0% {
+    transform: translateY(0) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) rotateY(360deg);
+    opacity: 0;
   }
 }

@@ -1,9 +1,10 @@
 .coin {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 37px;
   background-image: url("../../assets/images/crabby.png");
   background-size: contain;
+  background-repeat: no-repeat;
   z-index: 10;
   visibility: visible;
   animation: blink 5s ease-out forwards;
@@ -13,16 +14,15 @@
   position: absolute;
   left: 80px;
   top: 80px;
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 60px;
   background-repeat: no-repeat;
   background-image: url("../../assets/images/octopus.png");
   background-size: contain;
-  background-repeat: no-repeat;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;
 }
 .character:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
   background-size: 90%;
 }
 
@@ -171,10 +171,11 @@
 
 .obstacle {
   position: absolute;
-  width: 80px;
+  width: 75px;
   height: 60px;
   background-image: url("../../assets/images/shark.png");
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   z-index: 99;
   visibility: visible;
   animation: swimShark 6s ease-in-out infinite;
@@ -262,23 +263,24 @@
   cursor: pointer;
 }
 
-@keyframes floatUp {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-}
 .collision-animation {
   position: absolute;
-  font-size: 24px;
-  font-weight: bold;
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   z-index: 1000;
   pointer-events: none;
-  animation: floatUp 1s ease-out forwards;
+  animation: floatAndFlip 1s ease-out forwards;
+}
+
+.coin-icon {
+  background-image: url("../../assets/images/crabby_coin.png");
+}
+
+.broken-heart-icon {
+  background-image: url("../../assets/images/broken_heart.png");
 }
 
 .game {
@@ -402,16 +404,26 @@
     transform: translateY(0);
   }
   25% {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
   }
   50% {
     transform: translateY(0);
   }
   75% {
-    transform: translateY(5px);
+    transform: translateY(10px);
   }
   100% {
     transform: translateY(0);
+  }
+}
+@keyframes floatAndFlip {
+  0% {
+    transform: translateY(0) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) rotateY(360deg);
+    opacity: 0;
   }
 }
 .start-screen {

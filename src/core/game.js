@@ -156,6 +156,30 @@ export class Game {
     }
   }
 
+  createCollisionAnimation(x, y, type) {
+    console.log('Creating collision animation at:', x, y);
+    const animationElement = document.createElement('div');
+    animationElement.classList.add('collision-animation');
+
+    if (type === 'coin') {
+      animationElement.classList.add('coin-icon');
+      animationElement.style.left = `${x}px`;
+      animationElement.style.top = `${y - 20}px`;
+    } else if (type === 'obstacle') {
+      animationElement.classList.add('broken-heart-icon');
+      animationElement.style.left = `${x + 20}px`;
+      animationElement.style.top = `${y}px`;
+    }
+
+    this.container.appendChild(animationElement);
+
+    setTimeout(() => {
+      if (this.container.contains(animationElement)) {
+        this.container.removeChild(animationElement);
+      }
+    }, 1000);
+  }
+
   handleCoinCollision(coin, index) {
     if (this.soundManager) {
       this.soundManager.play('eat');
@@ -165,27 +189,8 @@ export class Game {
     this.punctuation++;
     this.totalCoinsCollected++;
     this.ui.updateScore(this.punctuation);
-
-    this.createCollisionAnimation(coin.x, coin.y, '+1', 'white');
+    this.createCollisionAnimation(coin.x, coin.y, 'coin');
   }
-
-  createCollisionAnimation(x, y, text, color) {
-  console.log('Creating collision animation at:', x, y); // Debugging
-  const animationElement = document.createElement('div');
-  animationElement.classList.add('collision-animation');
-  animationElement.style.left = `${x + this.character.width / 2}px`;
-  animationElement.style.top = `${y + this.character.height / 2}px`;
-  animationElement.style.color = color;
-  animationElement.textContent = text;
-  this.container.appendChild(animationElement);
-
-  // Remove the element after the animation
-  setTimeout(() => {
-    if (this.container.contains(animationElement)) {
-      this.container.removeChild(animationElement);
-    }
-  }, 1000);
-}
 
   handleObstacleCollision(index) {
     this.lives--;
@@ -202,7 +207,7 @@ export class Game {
     }
 
     const obstacle = this.objects[index];
-    this.createCollisionAnimation(obstacle.x, obstacle.y, '💔', 'white');
+    this.createCollisionAnimation(obstacle.x, obstacle.y, 'obstacle');
 
     this.removeObjectFromDOM(this.objects[index]);
     this.objects.splice(index, 1);

@@ -2,10 +2,11 @@
 
 .coin {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 37px;
   background-image: $coin-img;
   background-size: contain;
+  background-repeat: no-repeat;
   z-index: 10;
   visibility: visible;
   animation: blink 5s ease-out forwards;

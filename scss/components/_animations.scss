@@ -1,19 +1,21 @@
-@keyframes floatUp {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-}
+@import '../base/variables';
 
 .collision-animation {
   position: absolute;
-  font-size: 24px;
-  font-weight: bold;
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   z-index: 1000;
   pointer-events: none;
-  animation: floatUp 1s ease-out forwards;
+  animation: floatAndFlip 1s ease-out forwards;
+}
+
+.coin-icon {
+  background-image: $point-img;
+}
+
+.broken-heart-icon {
+  background-image: $brokentHeart-img;
 }

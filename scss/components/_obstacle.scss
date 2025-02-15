@@ -2,10 +2,11 @@
 
 .obstacle {
   position: absolute;
-  width: 80px;
+  width: 75px;
   height: 60px;
   background-image: $obstacle-img;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   z-index: 99;
   visibility: visible;
   animation: swimShark 6s ease-in-out infinite;
