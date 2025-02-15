@@ -10,6 +10,10 @@
   animation: blink 5s ease-out forwards;
 }
 
+.coin-icon {
+  background-image: url("../../assets/images/crabby_coin.png");
+}
+
 .character {
   position: absolute;
   left: 80px;
@@ -181,6 +185,10 @@
   animation: swimShark 6s ease-in-out infinite;
 }
 
+.broken-heart-icon {
+  background-image: url("../../assets/images/broken_heart.png");
+}
+
 .main__sound {
   display: flex;
   justify-content: center;
@@ -275,12 +283,8 @@
   animation: floatAndFlip 1s ease-out forwards;
 }
 
-.coin-icon {
-  background-image: url("../../assets/images/crabby_coin.png");
-}
-
-.broken-heart-icon {
-  background-image: url("../../assets/images/broken_heart.png");
+.red-flash {
+  animation: redFlash 0.8s ease-in-out;
 }
 
 .game {
@@ -424,6 +428,14 @@
   100% {
     transform: translateY(-50px) rotateY(360deg);
     opacity: 0;
+  }
+}
+@keyframes redFlash {
+  0%, 40%, 80% {
+    filter: saturate(0) hue-rotate(0deg);
+  }
+  20%, 60%, 100% {
+    filter: saturate(200) hue-rotate(250deg);
   }
 }
 .start-screen {

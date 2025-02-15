@@ -80,3 +80,12 @@
     opacity: 0;
   }
 }
+
+@keyframes redFlash {
+  0%, 40%, 80% {
+    filter: saturate(0) hue-rotate(0deg);
+  }
+  20%, 60%, 100% {
+    filter: saturate(200) hue-rotate(250deg);
+  }
+}

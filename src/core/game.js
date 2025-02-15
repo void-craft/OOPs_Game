@@ -199,6 +199,16 @@ export class Game {
     }
     this.ui.updateLives(this.lives);
 
+     // Apply red flash effect to the character
+  if (this.character && this.character.element) {
+    this.character.element.classList.add('red-flash');
+
+    // Remove the red-flash class after the animation ends
+    setTimeout(() => {
+      this.character.element.classList.remove('red-flash');
+    }, 500); // Match the duration of the CSS animation
+  }
+
     if (this.lives <= 0) {
       if (this.soundManager) {
         this.soundManager.play('gameOver');

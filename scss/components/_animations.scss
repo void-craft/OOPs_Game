@@ -12,10 +12,6 @@
   animation: floatAndFlip 1s ease-out forwards;
 }
 
-.coin-icon {
-  background-image: $point-img;
-}
-
-.broken-heart-icon {
-  background-image: $brokentHeart-img;
+.red-flash {
+  animation: redFlash 0.8s ease-in-out;
 }
