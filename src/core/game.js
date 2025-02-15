@@ -1,8 +1,8 @@
 import { Character } from '../objects/character.js';
 import { Coin } from '../objects/coin.js';
 import { Obstacle } from '../objects/obstacle.js';
-import { GameUI } from '../ui/gameUI.js';
 import { ObjectSpawner } from './objectSpawner.js';
+import { GameUI } from '../ui/gameUI.js';
 import { SoundManager } from './soundManager.js';
 
 export class Game {
@@ -27,17 +27,32 @@ export class Game {
     this.createScenario();
     this.spawner = new ObjectSpawner(this);
 
-    this.ui.playButton.addEventListener('click', () => {
-      this.startGame();
-    });
+    if (this.ui.playButton) {
+      this.ui.playButton.addEventListener('click', () => {
+        this.startGame();
+      });
+    }
 
-    this.handleKeyDown = (e) => this.character.move(e);
+    this.handleKeyDown = (e) => {
+      if (this.character) {
+        if (e.key === 'ArrowUp' || e.key === ' ') {
+          this.character.handleJump();
+        } else {
+          this.character.move(e);
+        }
+      }
+    };
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleRestart = this.restartGame.bind(this);
   }
 
   startGame() {
     this.isGameStarted = true;
     this.ui.hideStartScreen();
-    this.soundManager.startGame();
+    if (this.soundManager) {
+      this.soundManager.startGame();
+    }
     this.spawner.start();
     this.addEvents();
     this.gameLoop();
@@ -46,7 +61,11 @@ export class Game {
   gameOver() {
     this.isGameOver = true;
     this.spawner.stop();
-    this.soundManager.gameOver();
+    if (this.soundManager) {
+      this.soundManager.gameOver();
+    }
+
+    this.removeEvents();
 
     this.objects.forEach((obj) => this.removeObjectFromDOM(obj));
     this.objects = [];
@@ -79,7 +98,9 @@ export class Game {
     this.container.appendChild(this.character.element);
 
     this.spawner.start();
-    this.soundManager.startGame(); 
+    if (this.soundManager) {
+      this.soundManager.startGame();
+    }
     this.addEvents();
     this.gameLoop();
   }
@@ -90,9 +111,14 @@ export class Game {
   }
 
   addEvents() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    this.removeEvents();
     window.addEventListener('keydown', this.handleKeyDown);
-    this.ui.addRestartListener(() => this.restartGame());
+    this.ui.addRestartListener(this.handleRestart);
+  }
+
+  removeEvents() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+    this.ui.removeRestartListener(this.handleRestart);
   }
 
   gameLoop() {
@@ -100,7 +126,10 @@ export class Game {
 
     this.character.applyGravity();
     this.checkCollisions();
-    requestAnimationFrame(() => this.gameLoop());
+
+    if (!this.isGameOver) {
+      requestAnimationFrame(() => this.gameLoop());
+    }
   }
 
   checkCollisions() {
@@ -128,32 +157,59 @@ export class Game {
   }
 
   handleCoinCollision(coin, index) {
-    this.soundManager.play('eat');
+    if (this.soundManager) {
+      this.soundManager.play('eat');
+    }
     this.removeObjectFromDOM(coin);
     this.objects.splice(index, 1);
     this.punctuation++;
     this.totalCoinsCollected++;
     this.ui.updateScore(this.punctuation);
+
+    this.createCollisionAnimation(coin.x, coin.y, '+1', 'white');
   }
+
+  createCollisionAnimation(x, y, text, color) {
+  console.log('Creating collision animation at:', x, y); // Debugging
+  const animationElement = document.createElement('div');
+  animationElement.classList.add('collision-animation');
+  animationElement.style.left = `${x + this.character.width / 2}px`;
+  animationElement.style.top = `${y + this.character.height / 2}px`;
+  animationElement.style.color = color;
+  animationElement.textContent = text;
+  this.container.appendChild(animationElement);
+
+  // Remove the element after the animation
+  setTimeout(() => {
+    if (this.container.contains(animationElement)) {
+      this.container.removeChild(animationElement);
+    }
+  }, 1000);
+}
 
   handleObstacleCollision(index) {
     this.lives--;
-    this.soundManager.play('hit');
+    if (this.soundManager) {
+      this.soundManager.play('hit');
+    }
     this.ui.updateLives(this.lives);
 
     if (this.lives <= 0) {
-      this.soundManager.play('gameOver');
+      if (this.soundManager) {
+        this.soundManager.play('gameOver');
+      }
       this.gameOver();
-    } else {
-      this.soundManager.play('hit');
     }
+
+    const obstacle = this.objects[index];
+    this.createCollisionAnimation(obstacle.x, obstacle.y, '💔', 'white');
 
     this.removeObjectFromDOM(this.objects[index]);
     this.objects.splice(index, 1);
   }
 
   removeObjectFromDOM(object) {
-    if (object.element && this.container.contains(object.element)) {
+    if (object && object.element && this.container.contains(object.element)) {
       this.container.removeChild(object.element);
     }
   }

@@ -2,7 +2,7 @@
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url("../../assets/img/crabby.png");
+  background-image: url("../../assets/images/crabby.png");
   background-size: contain;
   z-index: 10;
   visibility: visible;
@@ -16,10 +16,9 @@
   width: 70px;
   height: 70px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/img/octopus.png");
+  background-image: url("../../assets/images/octopus.png");
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 9;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;
 }
 .character:hover {
@@ -66,7 +65,7 @@
 }
 
 .main__sound--music__mute-button {
-  background: url("../../assets/img/music_on.png") no-repeat center;
+  background: url("../../assets/images/music_on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -77,12 +76,12 @@
   -webkit-appearance: none;
 }
 .main__sound--music__mute-button.muted {
-  background: url("../../assets/img/music_off.png") no-repeat center;
+  background: url("../../assets/images/music_off.png") no-repeat center;
   background-size: cover;
 }
 
 .main__sound--effect__mute-button {
-  background: url("../../assets/img/effect_on.png") no-repeat center;
+  background: url("../../assets/images/effect_on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -93,7 +92,7 @@
   -webkit-appearance: none;
 }
 .main__sound--effect__mute-button.muted {
-  background: url("../../assets/img/effect_off.png") no-repeat center;
+  background: url("../../assets/images/effect_off.png") no-repeat center;
   background-size: cover;
 }
 
@@ -160,7 +159,7 @@
   position: relative;
   width: 55%;
   height: 80%;
-  background-image: url("../../assets/img/game_background.jpg");
+  background-image: url("../../assets/images/game_background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -174,7 +173,7 @@
   position: absolute;
   width: 80px;
   height: 60px;
-  background-image: url("../../assets/img/shark.png");
+  background-image: url("../../assets/images/shark.png");
   background-size: cover;
   z-index: 99;
   visibility: visible;
@@ -197,7 +196,7 @@
 }
 
 .main__sound--music__mute-button {
-  background: url("../../assets/img/music_on.png") no-repeat center;
+  background: url("../../assets/images/music_on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -208,12 +207,12 @@
   -webkit-appearance: none;
 }
 .main__sound--music__mute-button.muted {
-  background: url("../../assets/img/music_off.png") no-repeat center;
+  background: url("../../assets/images/music_off.png") no-repeat center;
   background-size: cover;
 }
 
 .main__sound--effect__mute-button {
-  background: url("../../assets/img/effect_on.png") no-repeat center;
+  background: url("../../assets/images/effect_on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -224,7 +223,7 @@
   -webkit-appearance: none;
 }
 .main__sound--effect__mute-button.muted {
-  background: url("../../assets/img/effect_off.png") no-repeat center;
+  background: url("../../assets/images/effect_off.png") no-repeat center;
   background-size: cover;
 }
 
@@ -263,6 +262,25 @@
   cursor: pointer;
 }
 
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+.collision-animation {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 1000;
+  pointer-events: none;
+  animation: floatUp 1s ease-out forwards;
+}
+
 .game {
   margin: 0;
   padding: 0;
@@ -283,46 +301,45 @@
 
 .game-over {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  max-width: 600px;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: #ecf0f1;
-  font-family: "Caveat", sans-serif;
-  text-align: center;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0px 0px 15px white;
-  display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border: 5px solid #330867;
+  margin: 0;
 }
 .game-over h1 {
-  font-size: 3rem;
-  font-family: "Macondo", serif;
+  margin: 0;
+  padding: 0;
   color: #330867;
-  text-shadow: 2px 2px 2px rgb(255, 255, 255);
-  margin-bottom: 15px;
+  font-family: "Macondo", serif;
+  font-size: 2rem;
+  text-shadow: 0 2px 5px rgb(255, 255, 255);
+}
+.game-over p {
+  margin: 5%;
+  padding: 0;
+  color: white;
+  font-family: "Macondo", serif;
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 .game-over__restart-button {
-  padding: 12px 30px;
-  font-size: 1.4rem;
+  margin-top: 2%;
+  font-size: 1.2rem;
+  font-family: "Macondo", serif;
+  padding: 2.5% 5%;
   font-weight: bold;
   cursor: pointer;
   background-color: #330867;
   color: white;
-  border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .game-over__restart-button i {
-  font-size: 1.6rem;
-  padding-right: 1rem;
+  font-size: 1rem;
+  padding-right: 0.75rem;
 }
 .game-over__restart-button:hover {
   background-color: #1c0438;
@@ -399,45 +416,31 @@
 }
 .start-screen {
   position: absolute;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  max-width: 600px;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #ecf0f1;
-  font-family: "Macondo", serif;
-  text-align: center;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0px 0px 15px white;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border: 5px solid #330867;
 }
-.start-screen h2 {
-  font-size: 2.5rem;
+.start-screen h1 {
+  padding: 0;
+  color: white;
   font-family: "Macondo", serif;
-  color: #330867;
-  margin-bottom: 15px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 .start-screen__play-button {
-  padding: 12px 30px;
-  font-size: 1.4rem;
+  font-family: "Macondo", serif;
+  padding: 2.5% 5%;
   font-weight: bold;
   cursor: pointer;
   background-color: #330867;
   color: white;
-  border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .start-screen__play-button i {
-  font-size: 1.6rem;
-  padding-right: 1rem;
+  font-size: 1rem;
+  padding-right: 0.75rem;
 }
 .start-screen__play-button:hover {
   background-color: #1c0438;

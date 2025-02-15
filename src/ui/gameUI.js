@@ -1,8 +1,9 @@
 export class GameUI {
   constructor(soundManager) {
+    this.soundManager = soundManager;
 
     this.startScreen = document.querySelector('.start-screen');
-    this.playButton = document.querySelector('.start-screen .start-screen__play-button');
+    this.playButton = document.querySelector('.start-screen__play-button');
 
     this.scoreboard = document.querySelector('.main__scoreboard__score');
     this.livesElement = document.querySelector('.main__scoreboard__lives');
@@ -60,6 +61,22 @@ export class GameUI {
       });
     } else {
       console.error('Play button not found.');
+    }
+
+    this.restartCallback = null;
+  }
+
+  removeRestartListener(callback) {
+    if (this.restartButton && this.restartCallback) {
+      this.restartButton.removeEventListener('click', callback);
+      this.restartCallback = null;
+    }
+  }
+
+  addRestartListener(callback) {
+    if (this.restartButton) {
+      this.restartCallback = callback;
+      this.restartButton.addEventListener('click', callback);
     }
   }
 

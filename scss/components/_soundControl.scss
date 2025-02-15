@@ -1,5 +1,4 @@
-@import "../base/imagePaths";
-@import "../base/variables";
+@import '../base/variables';
 
 @mixin mute-button($bg-image, $muted-bg-image) {
   background: $bg-image no-repeat center;

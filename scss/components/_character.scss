@@ -1,4 +1,4 @@
-@import '../base/imagePaths';
+@import '../base/variables';
 
 .character {
   position: absolute;
@@ -10,7 +10,6 @@
   background-image: $character-img;
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 9;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;
 
   &:hover {

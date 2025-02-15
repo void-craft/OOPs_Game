@@ -1,6 +1,5 @@
-@import '../base/imagePaths';
-@import '../base/variables'; // Import your SCSS variables
-@import '../components/soundControl';
+@import '../base/variables';
+@import './soundControl';
 
 .main {
   display: flex;

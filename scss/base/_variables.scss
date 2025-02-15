@@ -2,7 +2,6 @@ $primary-color: #330867;
 $secondary-color: white;
 $background-color-top: #30cfd0;
 $background-color-bottom: #330867;
-$text-color: #ecf0f1;
 
 $header-font-family: "Macondo", serif;
 $header-font-size: 36px;
@@ -13,7 +12,7 @@ $scoreboard-font-size: 28px;
 $body-font-family: "Caveat", sans-serif;
 $body-font-size: 16px;
 $body-font-weight: normal;
-$body-text-color: $text-color;
+$body-text-color: $secondary-color;
 
 $button-size: 30px;
 $button-font-size: 14px;
@@ -23,8 +22,6 @@ $button-border-radius: 5px;
 $slider-width: 20px;
 $slider-height: 5px;
 $slider-thumb-size: 15px;
-$slider-thumb-bg: #d15cd9;
-$slider-bg: #ddd;
 
 $card-padding: 20px;
 $card-border-radius: 12px;
@@ -32,3 +29,15 @@ $card-border-radius: 12px;
 $border-color: #ccc;
 $shadow-color: rgba(0, 0, 0, 0.1);
 $glow-effect: 0px 0px 15px $secondary-color;
+
+$gameBg-img: url('../../assets/images/game_background.jpg');
+$character-img: url('../../assets/images/octopus.png');
+$coin-img: url('../../assets/images/crabby.png');
+$obstacle-img: url('../../assets/images/shark.png');
+
+$music-on-img: url('../../assets/images/music_on.png');
+$music-off-img: url('../../assets/images/music_off.png');
+$effect-on-img: url('../../assets/images/effect_on.png');
+$effect-off-img: url('../../assets/images/effect_off.png');
+
+
