@@ -55,6 +55,7 @@ export class Game {
     }
     this.spawner.start();
     this.addEvents();
+    this.isGameLoopOn = true;
     this.gameLoop();
   }
 
@@ -80,6 +81,7 @@ export class Game {
   restartGame() {
     this.isGameOver = false;
     this.isGameStarted = true;
+    this.isGameLoopOn = false;
     this.ui.hideGameOverScreen();
     this.punctuation = 0;
     this.totalCoinsSpawned = 0;
@@ -102,6 +104,7 @@ export class Game {
       this.soundManager.startGame();
     }
     this.addEvents();
+    this.isGameLoopOn = true;
     this.gameLoop();
   }
 
@@ -122,12 +125,12 @@ export class Game {
   }
 
   gameLoop() {
-    if (this.isGameOver) return;
+    if (this.isGameOver || !this.isGameLoopOn) return; // Check flag
 
     this.character.applyGravity();
     this.checkCollisions();
 
-    if (!this.isGameOver) {
+    if (!this.isGameOver && this.isGameLoopOn) {
       requestAnimationFrame(() => this.gameLoop());
     }
   }
@@ -199,14 +202,12 @@ export class Game {
     }
     this.ui.updateLives(this.lives);
 
-     // Apply red flash effect to the character
   if (this.character && this.character.element) {
     this.character.element.classList.add('red-flash');
 
-    // Remove the red-flash class after the animation ends
     setTimeout(() => {
       this.character.element.classList.remove('red-flash');
-    }, 500); // Match the duration of the CSS animation
+    }, 500);
   }
 
     if (this.lives <= 0) {
