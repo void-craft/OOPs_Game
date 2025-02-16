@@ -2,7 +2,7 @@
   position: absolute;
   width: 45px;
   height: 37px;
-  background-image: url("../../assets/images/crabby.PNG");
+  background-image: url("https://i.ibb.co/TMSVFfys/crabby.png");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 10;
@@ -11,7 +11,7 @@
 }
 
 .coin-icon {
-  background-image: url("../../assets/images/crabby_coin.PNG");
+  background-image: url("https://i.ibb.co/BKvC5Hqb/crabby-coin.png");
 }
 
 .character {
@@ -21,7 +21,7 @@
   width: 65px;
   height: 60px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/octopus.PNG");
+  background-image: url("https://i.ibb.co/bMbWJQ8W/octopus.png");
   background-size: contain;
   transition: transform 0.1s ease-in-out, background-size 0.3s ease;
 }
@@ -69,7 +69,7 @@
 }
 
 .main__sound--music__mute-button {
-  background: url("../../assets/images/music_on.PNG") no-repeat center;
+  background: url("https://i.ibb.co/qY5xBWLw/music-on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -80,12 +80,12 @@
   -webkit-appearance: none;
 }
 .main__sound--music__mute-button.muted {
-  background: url("../../assets/images/music_off.PNG") no-repeat center;
+  background: url("https://i.ibb.co/JWFs66Wn/music-off.png") no-repeat center;
   background-size: cover;
 }
 
 .main__sound--effect__mute-button {
-  background: url("../../assets/images/effect_on.PNG") no-repeat center;
+  background: url("https://i.ibb.co/F1gDmGK/effect-on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -96,7 +96,7 @@
   -webkit-appearance: none;
 }
 .main__sound--effect__mute-button.muted {
-  background: url("../../assets/images/effect_off.PNG") no-repeat center;
+  background: url("https://i.ibb.co/4wf7tpsZ/effect-off.png") no-repeat center;
   background-size: cover;
 }
 
@@ -163,7 +163,7 @@
   position: relative;
   width: 55%;
   height: 80%;
-  background-image: url("../../assets/images/game_background.JPG");
+  background-image: url("https://i.ibb.co/PsMXHTwd/game-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -177,7 +177,7 @@
   position: absolute;
   width: 75px;
   height: 60px;
-  background-image: url("../../assets/images/shark.PNG");
+  background-image: url("https://i.ibb.co/bMhfp3x7/shark.png");
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 99;
@@ -186,7 +186,7 @@
 }
 
 .broken-heart-icon {
-  background-image: url("../../assets/images/broken_heart.PNG");
+  background-image: url("https://i.ibb.co/FRQ2Gjk/broken-heart.png");
 }
 
 .main__sound {
@@ -205,7 +205,7 @@
 }
 
 .main__sound--music__mute-button {
-  background: url("../../assets/images/music_on.PNG") no-repeat center;
+  background: url("https://i.ibb.co/qY5xBWLw/music-on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -216,12 +216,12 @@
   -webkit-appearance: none;
 }
 .main__sound--music__mute-button.muted {
-  background: url("../../assets/images/music_off.PNG") no-repeat center;
+  background: url("https://i.ibb.co/JWFs66Wn/music-off.png") no-repeat center;
   background-size: cover;
 }
 
 .main__sound--effect__mute-button {
-  background: url("../../assets/images/effect_on.PNG") no-repeat center;
+  background: url("https://i.ibb.co/F1gDmGK/effect-on.png") no-repeat center;
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -232,7 +232,7 @@
   -webkit-appearance: none;
 }
 .main__sound--effect__mute-button.muted {
-  background: url("../../assets/images/effect_off.PNG") no-repeat center;
+  background: url("https://i.ibb.co/4wf7tpsZ/effect-off.png") no-repeat center;
   background-size: cover;
 }
 
