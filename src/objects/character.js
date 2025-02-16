@@ -25,13 +25,6 @@ export class Character {
     this.isJumping = false;
     this.jumpCount = 0;
     this.jumpVelocity = -10;
-    
-    console.log({
-      yVelocity: this.yVelocity,
-      jumpVelocity: this.jumpVelocity,
-      jumpCount: this.jumpCount,
-      isJumping: this.isJumping
-    });
   }
 
   move(event) {
@@ -62,17 +55,10 @@ export class Character {
   
   jump() {
     this.jumpNumber++;
-    console.log('=== Jump Called ===');
-    console.log('Jump number:', this.jumpNumber);
     
     this.jumpCount++;
     this.isJumping = true;
     this.yVelocity = this.jumpVelocity;
-
-    console.log('After jump:', {
-      yVelocity: this.yVelocity,
-      gravity: this.gravity
-    });
 
     const bubbleX = this.x + this.width / 2 - 10;
     const bubbleY = this.y + this.height - 10;

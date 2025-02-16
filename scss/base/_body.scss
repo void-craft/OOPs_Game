@@ -1,6 +1,6 @@
 @import "./variables";
 
-.game {
+.body {
   margin: 0;
   padding: 0;
   background-size: cover;
@@ -13,7 +13,7 @@
   align-items: center;
   height: 100vh;
 
-  &__title {
+  &__heading {
     font-family: $header-font-family;
     color: $secondary-color;
   }

@@ -11,18 +11,20 @@
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 
-<body class="game">
-  <h1 class="game__title">Adventure San Cris</h1>
+<body class="body">
+  <h1 class="body__heading">Adventure San Cris</h1>
 
   <main class="main">
     <section class="main__scoreboard">
-      <span class="main__scoreboard__score">Score: 0</span>
-      <span class="main__scoreboard__lives">Lives: 3</span>
+      <span class="main__scoreboard__score">
+        <span class="main__scoreboard__icon"></span>
+        <span id="score-value">0</span>
+      </span>
+      <span class="main__scoreboard__lives" id="lives-container"></span>
     </section>
     <section class="main__sound">
       <div class="main__sound--music">
@@ -42,7 +44,7 @@
     </section>
     <section class="main__container" aria-label="Game Area"></section>
     <div class="start-screen">
-      <h1>Welcome to Adventure San Cris!</h1>
+      <h1>Welcome to Adventure San Cris</h1>
       <button class="start-screen__play-button"><i class="fas fa-play"></i>Play</button>
     </div>
     <div class="game-over">

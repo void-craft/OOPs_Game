@@ -1,6 +1,6 @@
 export class GameObject {
-  constructor(game, container, x, y, width, height, elementClass, type) {
-    this.game = game;
+  constructor(body, container, x, y, width, height, elementClass, type) {
+    this.body = body;
     this.x = x || Math.random() * (container.offsetWidth - width);
     this.y = y || Math.random() * (container.offsetHeight - height);
     this.width = width;
@@ -17,21 +17,6 @@ export class GameObject {
   updatePosition() {
     this.element.style.left = `${this.x}px`;
     this.element.style.top = `${this.y}px`;
-  }
-
-  move(dx, dy) {
-    this.x += dx;
-    this.y += dy;
-    this.updatePosition();
-  }
-
-  checkBounds() {
-    const containerWidth = this.container.offsetWidth;
-    const containerHeight = this.container.offsetHeight;
-
-    this.x = Math.max(0, Math.min(this.x, containerWidth - this.width));
-    this.y = Math.max(0, Math.min(this.y, containerHeight - this.height));
-    this.updatePosition();
   }
 
   collideWith(character) {
@@ -58,24 +43,8 @@ export class GameObject {
     }
   }
 
-  destroy() {
-    this.remove();
-    // Add any additional cleanup logic here
-  }
-
   addClickListener(callback) {
     this.element.addEventListener('click', callback);
   }
 
-  startAnimation(animationClass) {
-    this.element.classList.add(animationClass);
-  }
-
-  stopAnimation(animationClass) {
-    this.element.classList.remove(animationClass);
-  }
-
-  debug() {
-    this.element.style.border = '2px solid red';
-  }
 }

@@ -12,6 +12,12 @@
   animation: blink 5s ease-out forwards;
 }
 
-.coin-icon {
+.point-icon {
   background-image: $point-img;
+}
+
+.life-icon {
+  background-image: $life-img;
+  width: 30px;
+  height: 30x;
 }

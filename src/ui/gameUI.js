@@ -110,19 +110,29 @@ export class GameUI {
 
   updateScore(score) {
     if (this.scoreboard) {
-      this.scoreboard.textContent = `Score: ${score}`;
+      this.scoreboard.textContent = `${score}`;
     } else {
       console.error('Scoreboard element not found.');
     }
   }
 
   updateLives(lives) {
-    if (this.livesElement) {
-      this.livesElement.textContent = `Lives: ${lives}`;
-    } else {
-      console.error('Lives element not found.');
+  const livesContainer = document.querySelector('.main__scoreboard__lives');
+  if (livesContainer) {
+    // Clear existing life icons
+    livesContainer.innerHTML = '';
+
+    // Add life icons based on the number of lives
+    for (let i = 0; i < lives; i++) {
+      const heart = document.createElement('span');
+      heart.classList.add('life-icon');
+      heart.textContent = '❤️'; // Use a heart emoji or an image
+      livesContainer.appendChild(heart);
     }
+  } else {
+    console.error('Lives container not found.');
   }
+}
 
   showStartScreen() {
     if (this.startScreen) {

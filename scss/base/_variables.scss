@@ -2,8 +2,9 @@ $primary-color: #330867;
 $secondary-color: white;
 $background-color-top: #30cfd0;
 $background-color-bottom: #330867;
+$glow-effect: 0 0 10px 3px $secondary-color;
 
-$header-font-family: "Macondo", serif;
+$header-font-family: "MedievalSharp", serif;
 $header-font-size: 36px;
 $header-font-weight: bold;
 $header-text-color: $primary-color;
@@ -19,7 +20,7 @@ $button-font-size: 14px;
 $button-bg-color: $primary-color;
 $button-border-radius: 5px;
 
-$slider-width: 20px;
+$slider-width: 10px;
 $slider-height: 5px;
 $slider-thumb-size: 15px;
 
@@ -36,6 +37,7 @@ $coin-img: url('https://i.ibb.co/TMSVFfys/crabby.png');
 $obstacle-img: url('https://i.ibb.co/bMhfp3x7/shark.png');
 $point-img: url('https://i.ibb.co/BKvC5Hqb/crabby-coin.png');
 $brokentHeart-img: url('https://i.ibb.co/FRQ2Gjk/broken-heart.png');
+$life-img: url('https://i.ibb.co/5XRbNs2F/heart.png');
 
 $music-on-img: url('https://i.ibb.co/qY5xBWLw/music-on.png');
 $music-off-img: url('https://i.ibb.co/JWFs66Wn/music-off.png');

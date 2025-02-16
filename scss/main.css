@@ -10,8 +10,14 @@
   animation: blink 5s ease-out forwards;
 }
 
-.coin-icon {
+.point-icon {
   background-image: url("https://i.ibb.co/BKvC5Hqb/crabby-coin.png");
+}
+
+.life-icon {
+  background-image: url("https://i.ibb.co/5XRbNs2F/heart.png");
+  width: 30px;
+  height: 30x;
 }
 
 .character {
@@ -107,7 +113,7 @@
 }
 
 .main__sound--volume-input {
-  width: 20px;
+  width: 10px;
   height: 5px;
   background: white;
   border-radius: 5px;
@@ -115,7 +121,7 @@
   -moz-appearance: none;
        appearance: none;
   -webkit-appearance: none;
-  width: 100%;
+  width: 75%;
   margin: 0;
   padding: 0;
 }
@@ -146,28 +152,43 @@
   padding: 1%;
 }
 .main__scoreboard {
+  background-color: #330867;
+  width: 20%;
+  box-shadow: 0px 0px 15px white;
   font-size: 28px;
-  font-weight: bold;
   color: white;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
 }
 .main__scoreboard__score, .main__scoreboard__lives {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: "Caveat", sans-serif;
 }
-.main__scoreboard:hover {
-  color: #330867;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  transform: scale(1.1);
-  transition: all 0.3s ease;
+.main__scoreboard__score::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url("https://i.ibb.co/BKvC5Hqb/crabby-coin.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
 }
 .main__container {
   position: relative;
+  border-radius: 10px;
   width: 55%;
   height: 80%;
   background-image: url("https://i.ibb.co/PsMXHTwd/game-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 20px 5px white;
+  box-shadow: 0px 0px 15px white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -243,7 +264,7 @@
 }
 
 .main__sound--volume-input {
-  width: 20px;
+  width: 10px;
   height: 5px;
   background: white;
   border-radius: 5px;
@@ -251,7 +272,7 @@
   -moz-appearance: none;
        appearance: none;
   -webkit-appearance: none;
-  width: 100%;
+  width: 75%;
   margin: 0;
   padding: 0;
 }
@@ -287,7 +308,7 @@
   animation: redFlash 0.8s ease-in-out;
 }
 
-.game {
+.body {
   margin: 0;
   padding: 0;
   background-size: cover;
@@ -300,8 +321,8 @@
   align-items: center;
   height: 100vh;
 }
-.game__title {
-  font-family: "Macondo", serif;
+.body__heading {
+  font-family: "MedievalSharp", serif;
   color: white;
 }
 
@@ -318,7 +339,7 @@
   margin: 0;
   padding: 0;
   color: #330867;
-  font-family: "Macondo", serif;
+  font-family: "MedievalSharp", serif;
   font-size: 2rem;
   text-shadow: 0 2px 5px rgb(255, 255, 255);
 }
@@ -326,14 +347,14 @@
   margin: 5%;
   padding: 0;
   color: white;
-  font-family: "Macondo", serif;
+  font-family: "MedievalSharp", serif;
   font-weight: bold;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 .game-over__restart-button {
   margin-top: 2%;
   font-size: 1.2rem;
-  font-family: "Macondo", serif;
+  font-family: "MedievalSharp", serif;
   padding: 2.5% 5%;
   font-weight: bold;
   cursor: pointer;
@@ -448,11 +469,11 @@
 .start-screen h1 {
   padding: 0;
   color: white;
-  font-family: "Macondo", serif;
+  font-family: "MedievalSharp", serif;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 .start-screen__play-button {
-  font-family: "Macondo", serif;
+  font-family: "MedievalSharp", serif;
   padding: 2.5% 5%;
   font-weight: bold;
   cursor: pointer;

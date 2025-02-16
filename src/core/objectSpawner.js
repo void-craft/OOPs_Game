@@ -2,9 +2,9 @@ import { Coin } from '../objects/coin.js';
 import { Obstacle } from '../objects/obstacle.js';
 
 export class ObjectSpawner {
-  constructor(game) {
-    this.game = game;
-    this.container = game.container;
+  constructor(body) {
+    this.body = body;
+    this.container = body.container;
     this.coinSpawner = null;
     this.obstacleSpawner = null;
   }
@@ -13,8 +13,8 @@ export class ObjectSpawner {
     this.stop();
     this.coinSpawner = setInterval(() => {
       if (
-        this.game.isGameOver ||
-        this.game.totalCoinsSpawned >= this.game.maxCoins
+        this.body.isGameOver ||
+        this.body.totalCoinsSpawned >= this.body.maxCoins
       ) {
         clearInterval(this.coinSpawner);
         return;
@@ -23,7 +23,7 @@ export class ObjectSpawner {
     }, 2000);
 
     this.obstacleSpawner = setInterval(() => {
-      if (this.game.isGameOver) {
+      if (this.body.isGameOver) {
         clearInterval(this.obstacleSpawner);
         return;
       }
@@ -37,28 +37,28 @@ export class ObjectSpawner {
   }
 
   spawnCoin() {
-    const coin = new Coin(this.game, this.container);
-    this.game.totalCoinsSpawned++;
+    const coin = new Coin(this.body, this.container);
+    this.body.totalCoinsSpawned++;
     this.addObjectToGame(coin, 5000);
   }
 
   spawnObstacle() {
-    const obstacle = new Obstacle(this.game, this.container);
+    const obstacle = new Obstacle(this.body, this.container);
     this.addObjectToGame(obstacle, 7000);
   }
 
   addObjectToGame(object, lifespan) {
     if (object && object.element) {
       this.container.appendChild(object.element);
-      this.game.objects.push(object);
+      this.body.objects.push(object);
 
       setTimeout(() => {
-        if (this.game.isGameOver) return;
-        if (this.game.objects.includes(object)) {
+        if (this.body.isGameOver) return;
+        if (this.body.objects.includes(object)) {
           if (object.element && this.container.contains(object.element)) {
             this.container.removeChild(object.element);
           }
-          this.game.objects.splice(this.game.objects.indexOf(object), 1);
+          this.body.objects.splice(this.body.objects.indexOf(object), 1);
         }
       }, lifespan);
     }
