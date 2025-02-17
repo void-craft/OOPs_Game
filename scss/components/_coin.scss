@@ -14,10 +14,12 @@
 
 .point-icon {
   background-image: $point-img;
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+  animation: floatAndFlip 1s ease-out;
 }
 
 .life-icon {
   background-image: $life-img;
-  width: 30px;
-  height: 30x;
 }

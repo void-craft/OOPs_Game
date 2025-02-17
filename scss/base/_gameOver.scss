@@ -1,57 +1,54 @@
-@import "./variables";
-
 .game-over {
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: none;
   flex-direction: column;
   align-items: center;
+  z-index: 10;
+
+& h1 {
   margin: 0;
-
-  & h1 {
-    margin: 0;
-    padding: 0;
-    color: $primary-color;
-    font-family: $header-font-family;
-    font-size: 2rem;
-    text-shadow: 0 2px 5px rgba(255, 255, 255, 1);
-  }
-  
-  & p {
-    margin: 5%;
-    padding: 0;
-    color: $secondary-color;
-    font-family: $header-font-family;
-    font-weight: bold;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-  }
-
-  &__restart-button {
-    margin-top: 2%;
-    font-size: 1.2rem;
-    font-family: $header-font-family;
-    padding: 2.5% 5%;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: $primary-color;
-    color: $secondary-color;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-
-    & i {
-    font-size: 1rem;
-      padding-right: 0.75rem;
-  }
-
-    &:hover {
-      background-color: darken($primary-color, 10%);
-      transform: scale(1.05);
-    }
-
-    &:active {
-      transform: scale(1);
-    }
-  }
+  padding: 0;
+  color: $primary-color;
+  font-family: $header-font-family;
+  font-size: 2rem;
+  text-shadow: 0 2px 5px rgba(255, 255, 255, 1);
 }
+
+& p {
+  margin: 5%;
+  padding: 0;
+  color: $secondary-color;
+  font-family: $header-font-family;
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+&__restart-button {
+  margin-top: 2%;
+  font-size: 1.2rem;
+  font-family: $header-font-family;
+  padding: 2.5% 5%;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $secondary-color;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+& i {
+  font-size: 1rem;
+  padding-right: 0.75rem;
+}
+
+&:hover {
+  background-color: darken($primary-color, 10%);
+  transform: scale(1.05);
+}
+
+&:active {
+  transform: scale(1);
+}}}

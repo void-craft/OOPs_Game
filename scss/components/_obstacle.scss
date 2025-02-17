@@ -14,4 +14,8 @@
 
 .broken-heart-icon {
   background-image: $brokentHeart-img;
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+  animation: floatAndFlip 1s ease-out;
 }

@@ -2,33 +2,17 @@ import { Coin } from '../objects/coin.js';
 import { Obstacle } from '../objects/obstacle.js';
 
 export class ObjectSpawner {
-  constructor(body) {
-    this.body = body;
-    this.container = body.container;
+  constructor(game) {
+    this.game = game;
+    this.container = game.container; // Ensure this is a valid DOM element
     this.coinSpawner = null;
     this.obstacleSpawner = null;
   }
 
   start() {
-    this.stop();
-    this.coinSpawner = setInterval(() => {
-      if (
-        this.body.isGameOver ||
-        this.body.totalCoinsSpawned >= this.body.maxCoins
-      ) {
-        clearInterval(this.coinSpawner);
-        return;
-      }
-      this.spawnCoin();
-    }, 2000);
-
-    this.obstacleSpawner = setInterval(() => {
-      if (this.body.isGameOver) {
-        clearInterval(this.obstacleSpawner);
-        return;
-      }
-      this.spawnObstacle();
-    }, 7000);
+    this.stop(); // Clear existing intervals
+    this.coinSpawner = setInterval(() => this.spawnCoin(), 2000); // Spawn coins every 2 seconds
+    this.obstacleSpawner = setInterval(() => this.spawnObstacle(), 7000); // Spawn obstacles every 7 seconds
   }
 
   stop() {
@@ -37,30 +21,35 @@ export class ObjectSpawner {
   }
 
   spawnCoin() {
-    const coin = new Coin(this.body, this.container);
-    this.body.totalCoinsSpawned++;
-    this.addObjectToGame(coin, 5000);
+    if (this.game.isGameOver || this.game.totalCoinsSpawned >= this.game.maxCoins) return;
+
+    console.log('Spawning coin in container:', this.container); // Debugging
+    const coin = new Coin(this.container); // Pass only the container
+    this.game.totalCoinsSpawned++;
+    this.game.objects.push(coin);
+
+    // Remove coin after 5 seconds
+    setTimeout(() => {
+      if (this.game.objects.includes(coin)) {
+        this.game.removeObjectFromDOM(coin);
+        this.game.objects.splice(this.game.objects.indexOf(coin), 1);
+      }
+    }, 5000);
   }
 
   spawnObstacle() {
-    const obstacle = new Obstacle(this.body, this.container);
-    this.addObjectToGame(obstacle, 7000);
-  }
+    if (this.game.isGameOver) return;
 
-  addObjectToGame(object, lifespan) {
-    if (object && object.element) {
-      this.container.appendChild(object.element);
-      this.body.objects.push(object);
+    console.log('Spawning obstacle in container:', this.container); // Debugging
+    const obstacle = new Obstacle(this.container); // Pass only the container
+    this.game.objects.push(obstacle);
 
-      setTimeout(() => {
-        if (this.body.isGameOver) return;
-        if (this.body.objects.includes(object)) {
-          if (object.element && this.container.contains(object.element)) {
-            this.container.removeChild(object.element);
-          }
-          this.body.objects.splice(this.body.objects.indexOf(object), 1);
-        }
-      }, lifespan);
-    }
+    // Remove obstacle after 7 seconds
+    setTimeout(() => {
+      if (this.game.objects.includes(obstacle)) {
+        this.game.removeObjectFromDOM(obstacle);
+        this.game.objects.splice(this.game.objects.indexOf(obstacle), 1);
+      }
+    }, 7000);
   }
 }

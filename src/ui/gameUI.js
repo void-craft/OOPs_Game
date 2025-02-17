@@ -1,5 +1,6 @@
 export class GameUI {
-  constructor(soundManager) {
+  constructor(soundManager, lifeManager) {
+    this.lifeManager = lifeManager;
     this.soundManager = soundManager;
 
     this.startScreen = document.querySelector('.start-screen');
@@ -20,7 +21,9 @@ export class GameUI {
     this.muteEffectsButton = document.getElementById('mute-effects');
     this.volumeEffectsSlider = document.getElementById('volume-effects');
 
-    // Add event listeners if elements exist
+    this.showStartScreen();
+    this.hideGameOverScreen();
+
     if (this.muteBackgroundButton) {
       this.muteBackgroundButton.addEventListener('click', () =>
         this.toggleMuteBackground()
@@ -59,8 +62,12 @@ export class GameUI {
         this.soundManager.stop('wait');
         this.soundManager.play('background');
       });
-    } else {
-      console.error('Play button not found.');
+    }
+
+    if (this.restartButton) {
+      this.restartButton.addEventListener('click', () => {
+        this.hideGameOverScreen();
+      });
     }
 
     this.restartCallback = null;
@@ -70,13 +77,6 @@ export class GameUI {
     if (this.restartButton && this.restartCallback) {
       this.restartButton.removeEventListener('click', callback);
       this.restartCallback = null;
-    }
-  }
-
-  addRestartListener(callback) {
-    if (this.restartButton) {
-      this.restartCallback = callback;
-      this.restartButton.addEventListener('click', callback);
     }
   }
 
@@ -117,57 +117,33 @@ export class GameUI {
   }
 
   updateLives(lives) {
-  const livesContainer = document.querySelector('.main__scoreboard__lives');
-  if (livesContainer) {
-    // Clear existing life icons
-    livesContainer.innerHTML = '';
-
-    // Add life icons based on the number of lives
-    for (let i = 0; i < lives; i++) {
-      const heart = document.createElement('span');
-      heart.classList.add('life-icon');
-      heart.textContent = '❤️'; // Use a heart emoji or an image
-      livesContainer.appendChild(heart);
-    }
-  } else {
-    console.error('Lives container not found.');
+    this.lifeManager.updateLives(lives);
   }
-}
 
-  showStartScreen() {
+   showStartScreen() {
     if (this.startScreen) {
-      this.startScreen.style.display = 'flex';
-    } else {
-      console.error('Start screen overlay not found.');
+      this.startScreen.style.display = 'flex'; // Show start screen
     }
   }
-
+  
   hideStartScreen() {
     if (this.startScreen) {
-      this.startScreen.style.display = 'none';
-    } else {
-      console.error('Start screen overlay not found.');
+      this.startScreen.style.display = 'none'; // Hide start screen
     }
   }
 
   showGameOverScreen(score, lives, coins) {
     if (this.overlay) {
-      this.overlay.style.display = 'flex';
-      if (this.finalScore)
-        this.finalScore.textContent = `Final Score: ${score}`;
+      this.overlay.style.display = 'flex'; // Show game over screen
+      if (this.finalScore) this.finalScore.textContent = `Final Score: ${score}`;
       if (this.finalLives) this.finalLives.textContent = `Lives Left: ${lives}`;
-      if (this.finalCoins)
-        this.finalCoins.textContent = `Coins Collected: ${coins}`;
-    } else {
-      console.error('Game over overlay not found.');
+      if (this.finalCoins) this.finalCoins.textContent = `Coins Collected: ${coins}`;
     }
   }
 
   hideGameOverScreen() {
     if (this.overlay) {
-      this.overlay.style.display = 'none';
-    } else {
-      console.error('Game over overlay not found.');
+      this.overlay.style.display = 'none'; // Hide game over screen
     }
   }
 

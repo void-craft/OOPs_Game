@@ -3,18 +3,12 @@ import { Bubble } from './bubble.js';
 export class Character {
   constructor() {
     console.log('=== Character Constructor Called ===');
-    this.reset();
     this.element = document.createElement('div');
     this.element.classList.add('character');
     document.querySelector('.main__container').appendChild(this.element);
     this.updatePosition();
     this.maxJumps = 3;
-    this.bubbleInterval = null;
-    this.jumpNumber = 0;
-  }
-
-  reset() {
-    console.log('=== Reset Called ===');
+    this.jumpCount = 0;
     this.x = 50;
     this.y = 300;
     this.width = 80;
@@ -23,26 +17,21 @@ export class Character {
     this.yVelocity = 0;
     this.gravity = 0.5;
     this.isJumping = false;
-    this.jumpCount = 0;
     this.jumpVelocity = -10;
   }
 
   move(event) {
     const container = document.querySelector('.main__container');
     const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-    
-    switch(event.key) {
+
+    switch (event.key) {
       case 'ArrowRight':
-        this.x = Math.min(this.x + this.velocity, containerWidth - this.width - 15);
+        this.x = Math.min(this.x + this.velocity, containerWidth - this.width + 15);
         break;
       case 'ArrowLeft':
         this.x = Math.max(this.x - this.velocity, 0);
         break;
     }
-    
-    this.x = Math.max(0, Math.min(this.x, containerWidth - this.width));
-    this.y = Math.max(0, Math.min(this.y, containerHeight - this.height));
 
     this.updatePosition();
   }
@@ -52,20 +41,15 @@ export class Character {
       this.jump();
     }
   }
-  
+
   jump() {
-    this.jumpNumber++;
-    
     this.jumpCount++;
     this.isJumping = true;
     this.yVelocity = this.jumpVelocity;
 
-    const bubbleX = this.x + this.width / 2 - 10;
-    const bubbleY = this.y + this.height - 10;
-    let randomX = bubbleX + Math.random() * 30 - 15;
-    let randomY = bubbleY + Math.random() * 30 - 15;
-    
-    new Bubble(randomX, randomY);
+    const bubbleX = this.x + this.width / 2 - 10 + (Math.random() * 30 - 15);
+    const bubbleY = this.y + this.height - 10 + (Math.random() * 30 - 15);
+    new Bubble(bubbleX, bubbleY);
   }
 
   applyGravity() {
@@ -73,12 +57,7 @@ export class Character {
     this.y += this.yVelocity;
 
     const container = document.querySelector('.main__container');
-    const groundLevel = container.offsetHeight - this.height - 15;
-
-    if (this.y < 0) {
-      this.y = 0;
-      this.yVelocity = 0;
-    }
+    const groundLevel = container.offsetHeight - this.height;
 
     if (this.y >= groundLevel) {
       this.y = groundLevel;
@@ -86,15 +65,13 @@ export class Character {
       this.isJumping = false;
       this.jumpCount = 0;
     }
-      
+
     this.updatePosition();
   }
 
   updatePosition() {
-    if (this.element) {
-      this.element.style.left = `${this.x}px`;
-      this.element.style.top = `${this.y}px`;
-    }
+    this.element.style.left = `${this.x}px`;
+    this.element.style.top = `${this.y}px`;
   }
 
   collideWith(object) {

@@ -4,12 +4,18 @@ import { Obstacle } from '../objects/obstacle.js';
 import { ObjectSpawner } from './objectSpawner.js';
 import { GameUI } from '../ui/gameUI.js';
 import { SoundManager } from './soundManager.js';
+import { LifeManager } from '../ui/lifeManager.js';
+import { CollisionManager } from './collisionManager.js';
 
 export class Game {
   constructor() {
     this.container = document.querySelector('.main__container');
     this.soundManager = new SoundManager();
-    this.ui = new GameUI(this.soundManager);
+
+    const livesElement = document.querySelector('.main__scoreboard__lives');
+    this.lifeManager = new LifeManager(livesElement);
+
+    this.ui = new GameUI(this.soundManager, this.lifeManager);
     this.character = null;
     this.objects = [];
     this.punctuation = 0;
@@ -24,10 +30,13 @@ export class Game {
     this.ui.hideGameOverScreen();
     this.ui.showStartScreen();
 
-    this.ui.updateLives(this.lives);
+    this.lifeManager.updateLives(this.lives);
 
     this.createScenario();
     this.spawner = new ObjectSpawner(this);
+
+    // Initialize CollisionManager
+    this.collisionManager = new CollisionManager(this);
 
     if (this.ui.playButton) {
       this.ui.playButton.addEventListener('click', () => {
@@ -50,8 +59,9 @@ export class Game {
   }
 
   startGame() {
+    console.log('Game started!');
     this.isGameStarted = true;
-    this.ui.hideStartScreen();
+    this.ui.hideStartScreen(); // Hide start screen
     if (this.soundManager) {
       this.soundManager.startGame();
     }
@@ -73,7 +83,7 @@ export class Game {
     this.objects.forEach((obj) => this.removeObjectFromDOM(obj));
     this.objects = [];
 
-    this.ui.showGameOverScreen(
+    this.ui.showGameOverScreen( // Show game over screen
       this.punctuation,
       this.lives,
       this.totalCoinsCollected
@@ -81,34 +91,29 @@ export class Game {
   }
 
   restartGame() {
-  this.isGameOver = false;
-  this.isGameStarted = true;
-  this.isGameLoopOn = false;
-  this.ui.hideGameOverScreen();
-  this.punctuation = 0;
-  this.totalCoinsSpawned = 0;
-  this.totalCoinsCollected = 0;
-  this.lives = 3; // Reset lives to 3
-  this.ui.updateLives(this.lives); // Update the UI to show 3 lives
-  this.ui.updateScore(0);
+    this.isGameOver = false;
+    this.isGameStarted = false;
+    this.isGameLoopOn = false;
+    this.ui.hideGameOverScreen(); // Hide game over screen
 
-  this.objects.forEach((object) => this.removeObjectFromDOM(object));
-  this.objects = [];
+    this.punctuation = 0;
+    this.lives = 3;
+    this.totalCoinsSpawned = 0;
+    this.totalCoinsCollected = 0;
+    this.lifeManager.updateLives(this.lives);
+    this.ui.updateScore(0);
 
-  if (this.character && this.character.element) {
-    this.container.removeChild(this.character.element);
+    this.objects.forEach((object) => this.removeObjectFromDOM(object));
+    this.objects = [];
+
+    if (this.character && this.character.element) {
+      this.container.removeChild(this.character.element);
+    }
+    this.character = new Character();
+    this.container.appendChild(this.character.element);
+
+    this.startGame();
   }
-  this.character = new Character();
-  this.container.appendChild(this.character.element);
-
-  this.spawner.start();
-  if (this.soundManager) {
-    this.soundManager.startGame();
-  }
-  this.addEvents();
-  this.isGameLoopOn = true;
-  this.gameLoop();
-}
 
   createScenario() {
     this.character = new Character();
@@ -127,111 +132,15 @@ export class Game {
   }
 
   gameLoop() {
-    if (this.isGameOver || !this.isGameLoopOn) return; // Check flag
+    if (this.isGameOver || !this.isGameLoopOn) return;
 
     this.character.applyGravity();
-    this.checkCollisions();
+    this.collisionManager.checkCollisions(); // Delegate collision handling to CollisionManager
 
     if (!this.isGameOver && this.isGameLoopOn) {
       requestAnimationFrame(() => this.gameLoop());
     }
   }
-
-  checkCollisions() {
-    if (this.isGameOver) return;
-
-    for (let i = this.objects.length - 1; i >= 0; i--) {
-      const object = this.objects[i];
-      if (!object || !object.element) continue;
-
-      if (this.character.collideWith(object)) {
-        if (object instanceof Coin) {
-          this.handleCoinCollision(object, i);
-        } else if (object instanceof Obstacle) {
-          this.handleObstacleCollision(i);
-        }
-      }
-    }
-
-    if (
-      this.totalCoinsSpawned >= this.maxCoins &&
-      this.objects.filter((obj) => obj instanceof Coin).length === 0
-    ) {
-      this.gameOver();
-    }
-  }
-
-  createCollisionAnimation(x, y, type) {
-    console.log('Creating collision animation at:', x, y);
-    const animationElement = document.createElement('div');
-    animationElement.classList.add('collision-animation');
-
-    if (type === 'coin') {
-      animationElement.classList.add('point-icon');
-      animationElement.style.left = `${x}px`;
-      animationElement.style.top = `${y - 20}px`;
-    } else if (type === 'obstacle') {
-      animationElement.classList.add('broken-heart-icon');
-      animationElement.style.left = `${x + 20}px`;
-      animationElement.style.top = `${y}px`;
-    }
-
-    this.container.appendChild(animationElement);
-
-    setTimeout(() => {
-      if (this.container.contains(animationElement)) {
-        this.container.removeChild(animationElement);
-      }
-    }, 1000);
-  }
-
-  handleCoinCollision(coin, index) {
-    if (this.soundManager) {
-      this.soundManager.play('eat');
-    }
-    this.removeObjectFromDOM(coin);
-    this.objects.splice(index, 1);
-    this.punctuation++;
-    this.totalCoinsCollected++;
-    this.ui.updateScore(this.punctuation);
-    this.createCollisionAnimation(coin.x, coin.y, 'coin');
-  }
-
-  handleObstacleCollision(index) {
-  // Decrease lives
-  this.lives--;
-
-  // Update the UI to reflect the new number of lives
-  this.ui.updateLives(this.lives);
-
-  // Play hit sound effect
-  if (this.soundManager) {
-    this.soundManager.play('hit');
-  }
-
-  // Add visual feedback (red flash) to the character
-  if (this.character && this.character.element) {
-    this.character.element.classList.add('red-flash');
-
-    setTimeout(() => {
-      this.character.element.classList.remove('red-flash');
-    }, 500);
-  }
-
-  // Check if the player has run out of lives
-  if (this.lives <= 0) {
-    if (this.soundManager) {
-      this.soundManager.play('gameOver');
-    }
-    this.gameOver();
-  }
-
-  // Remove the obstacle from the game
-  const obstacle = this.objects[index];
-  this.createCollisionAnimation(obstacle.x, obstacle.y, 'obstacle');
-  this.removeObjectFromDOM(this.objects[index]);
-  this.objects.splice(index, 1);
-}
 
   removeObjectFromDOM(object) {
     if (object && object.element && this.container.contains(object.element)) {
