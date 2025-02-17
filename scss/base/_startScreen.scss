@@ -14,6 +14,15 @@
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
   }
 
+  & p {
+    padding: 0;
+    color: $secondary-color;
+    font-family: $header-font-family;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  }
+
   &__play-button {
     font-family: $header-font-family;
     padding: 2.5% 5%;
