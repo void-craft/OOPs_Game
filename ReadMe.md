@@ -1,4 +1,4 @@
-# Adventure San Cris 🎮
+# San Cris Adventures 🎮
 
 Welcome to **Adventure San Cris**, a fun and interactive 2D game where you control a character to collect coins, avoid obstacles, and survive as long as possible! Built using JavaScript (ES6), HTML5, and CSS3, this project demonstrates object-oriented programming (OOP) principles, game mechanics, and sound management.
 
@@ -36,14 +36,13 @@ Click the "Play" button on the start screen.
 ```bash
 
 OOPs_Game/
-├── src/
-│   ├── js/                # JavaScript files
-│   │   ├── core/          # Game logic and core classes
-│   │   ├── objects/       # Game objects (character, coins, obstacles)
-│   │   ├── ui/            # User interface management
-│   │   └── main.js        # Entry point
-│   ├── scss/              # SCSS stylesheets
-│   └── assets/            # Images, sounds, and other assets
+├── src/               # JavaScript files
+│   ├── core/          # Game logic and core classes
+│   ├── objects/       # Game objects (character, coins, obstacles)
+│   ├── ui/            # User interface management
+│   └── main.js        # Entry point
+├── scss/              # SCSS stylesheets
+└── assets/            # Images, sounds, and other assets
 ├── index.html             # Main HTML file
 └── README.md              # This file
 
