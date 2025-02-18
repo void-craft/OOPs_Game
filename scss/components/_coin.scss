@@ -13,11 +13,13 @@
 }
 
 .point-icon {
+  position: absolute;
   background-image: $point-img;
   background-size: contain;
   width: 25px;
   height: 25px;
   animation: floatAndFlip 1s ease-out;
+  pointer-events: none;
 }
 
 .life-icon {

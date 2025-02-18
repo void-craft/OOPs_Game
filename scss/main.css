@@ -11,11 +11,13 @@
 }
 
 .point-icon {
+  position: absolute;
   background-image: url("https://i.ibb.co/BKvC5Hqb/crabby-coin.png");
   background-size: contain;
   width: 25px;
   height: 25px;
   animation: floatAndFlip 1s ease-out;
+  pointer-events: none;
 }
 
 .life-icon {
@@ -209,11 +211,13 @@
 }
 
 .broken-heart-icon {
+  position: absolute;
   background-image: url("https://i.ibb.co/FRQ2Gjk/broken-heart.png");
   background-size: contain;
   width: 25px;
   height: 25px;
   animation: floatAndFlip 1s ease-out;
+  pointer-events: none;
 }
 
 .main__sound {
