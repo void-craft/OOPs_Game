@@ -2,6 +2,8 @@
 
 Welcome to **Adventure San Cris**, a fun and interactive 2D game where you control a character to collect coins, avoid obstacles, and survive as long as possible! Built using JavaScript (ES6), HTML5, and CSS3, this project demonstrates object-oriented programming (OOP) principles, game mechanics, and sound management.
 
+![image](https://github.com/user-attachments/assets/28401db0-f362-4b27-9bc3-d607796508bd)
+
 ## Features ✨
 - **Interactive Gameplay:** Move your character using keyboard controls to collect coins and avoid obstacles.
 - **Score System:** Earn points by collecting coins and see your score update in real-time.
@@ -15,7 +17,7 @@ Welcome to **Adventure San Cris**, a fun and interactive 2D game where you contr
 Click the "Play" button on the start screen.
 
 ### Controls:
-- Use the arrow keys or **WASD** to move your character.
+- Use the arrow keys to move your character.
 
 ### Objective:
 - Collect as many coins as you can to increase your score.
