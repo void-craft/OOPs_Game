@@ -59,7 +59,6 @@ export class GameUI {
     if (this.playButton) {
       this.playButton.addEventListener('click', () => {
         this.hideStartScreen();
-        // this.soundManager.startGame();
       });
     }
 
@@ -80,22 +79,22 @@ export class GameUI {
   }
 
   toggleMuteBackground() {
-    this.soundManager.muteBg();
-    if (this.soundManager.bgMuted) {
-      this.muteBackgroundButton.classList.add('muted');
-    } else {
-      this.muteBackgroundButton.classList.remove('muted');
-    }
+  this.soundManager.muteBg();
+  if (this.soundManager.bgMuted) {
+    this.muteBackgroundButton.classList.add('muted');
+  } else {
+    this.muteBackgroundButton.classList.remove('muted');
   }
+}
 
-  toggleMuteEffects() {
-    this.soundManager.muteEffects();
-    if (this.soundManager.effectsMuted) {
-      this.muteEffectsButton.classList.add('muted');
-    } else {
-      this.muteEffectsButton.classList.remove('muted');
-    }
+toggleMuteEffects() {
+  this.soundManager.muteEffects();
+  if (this.soundManager.effectsMuted) {
+    this.muteEffectsButton.classList.add('muted');
+  } else {
+    this.muteEffectsButton.classList.remove('muted');
   }
+}
 
   adjustVolumeBackground(e) {
     const volume = parseFloat(e.target.value);

@@ -33,11 +33,9 @@ export class SoundManager {
   }
 
   unlockAudio() {
-  if (!this.bgMuted) {
-    this.sounds.wait.play()
-      .then(() => console.log("Audio Unlocked!"))
-      .catch(e => console.warn("Audio Unlock Failed:", e));
-  }
+    console.log("Audio context unlocked");
+    this.audioUnlocked = true;
+  
   document.removeEventListener("click", this.unlockAudio);
   document.removeEventListener("keydown", this.unlockAudio);
 }
@@ -79,17 +77,17 @@ export class SoundManager {
   }
 
   muteBg() {
-    this.bgMuted = !this.bgMuted;
-    if (this.bgMuted) {
-      this.sounds.background.pause();
-      this.sounds.wait.pause();
-    } else {
-      if (this.sounds.wait.currentTime > 0) {
-        this.sounds.wait.play().catch(e => console.warn("Wait sound playback failed:", e));
-      } else {
-        this.sounds.background.play().catch(e => console.warn("Background music playback failed:", e));
-      }
-    }  }
+  this.bgMuted = !this.bgMuted;
+  if (this.bgMuted) {
+    this.sounds.background.pause();
+    this.sounds.wait.pause();
+  } else {
+    this.sounds.background.play().catch(e => console.warn("Background music playback failed:", e));
+    if (this.sounds.wait.currentTime > 0) {
+      this.sounds.wait.play().catch(e => console.warn("Wait sound playback failed:", e));
+    }
+  }
+}
 
   muteEffects() {
     this.effectsMuted = !this.effectsMuted;

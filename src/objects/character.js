@@ -2,7 +2,6 @@ import { Bubble } from './bubble.js';
 
 export class Character {
   constructor() {
-    console.log('=== Character Constructor Called ===');
     this.element = document.createElement('div');
     this.element.classList.add('character');
     document.querySelector('.main__container').appendChild(this.element);
@@ -17,7 +16,7 @@ export class Character {
     this.yVelocity = 0;
     this.gravity = 0.5;
     this.isJumping = false;
-    this.jumpVelocity = -10;
+    this.jumpVelocity = -15;
   }
 
   move(event) {
@@ -43,31 +42,43 @@ export class Character {
   }
 
   jump() {
-    this.jumpCount++;
-    this.isJumping = true;
-    this.yVelocity = this.jumpVelocity;
-
-    const bubbleX = this.x + this.width / 2 - 10 + (Math.random() * 30 - 15);
-    const bubbleY = this.y + this.height - 10 + (Math.random() * 30 - 15);
-    new Bubble(bubbleX, bubbleY);
+  this.jumpCount++;
+  this.isJumping = true;
+  if (this.jumpCount === 1) {
+    this.yVelocity = -8;
+  } else if (this.jumpCount === 2) {
+    this.yVelocity = -12;
+  } else if (this.jumpCount === 3) {
+    this.yVelocity = -20;
   }
+
+  const bubbleX = this.x + this.width / 2 - 10 + (Math.random() * 30 - 15);
+  const bubbleY = this.y + this.height - 10 + (Math.random() * 30 - 15);
+  new Bubble(bubbleX, bubbleY);
+}
 
   applyGravity() {
-    this.yVelocity += this.gravity;
-    this.y += this.yVelocity;
+  this.yVelocity += this.gravity;
+  this.y += this.yVelocity;
 
-    const container = document.querySelector('.main__container');
-    const groundLevel = container.offsetHeight - this.height;
+  const container = document.querySelector('.main__container');
+  const groundLevel = container.offsetHeight - this.height;
+  const topLimit = 0;
 
-    if (this.y >= groundLevel) {
-      this.y = groundLevel;
-      this.yVelocity = 0;
-      this.isJumping = false;
-      this.jumpCount = 0;
-    }
-
-    this.updatePosition();
+  if (this.y >= groundLevel) {
+    this.y = groundLevel;
+    this.yVelocity = 0;
+    this.isJumping = false;
+    this.jumpCount = 0;
   }
+
+  if (this.y < topLimit) {
+    this.y = topLimit;
+    this.yVelocity = 0;
+  }
+
+  this.updatePosition();
+}
 
   updatePosition() {
     this.element.style.left = `${this.x}px`;
