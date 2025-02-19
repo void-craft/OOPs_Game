@@ -10,7 +10,6 @@ export class LifeManager {
       for (let i = 0; i < lives; i++) {
         const heart = document.createElement('span');
         heart.classList.add('life-icon');
-        heart.textContent = '❤️';
         this.livesElement.appendChild(heart);
       }
     } else {

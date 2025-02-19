@@ -12,12 +12,12 @@
   padding: 1%;
 
   &__scoreboard {
-    background-color: $primary-color;
     width: 20%;
     box-shadow: $glow-effect;
     font-size: $scoreboard-font-size;
-    color: $secondary-color;
+    color: $primary-color;
     font-weight: bold;
+    font-family: $header-font-family;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -47,7 +47,6 @@
     border-radius: 10px;
     width: 55%;
     height: 80%;
-    background-image: $gameBg-img;
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;

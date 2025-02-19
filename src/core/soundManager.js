@@ -24,7 +24,8 @@ export class SoundManager {
       }
     });
 
-    this.play('wait');
+    this.sounds.wait.play()
+    .catch(e => console.log("Autoplay blocked until interaction"));
 
     this.unlockAudio = this.unlockAudio.bind(this);
     document.addEventListener("click", this.unlockAudio, { once: true });
@@ -32,10 +33,14 @@ export class SoundManager {
   }
 
   unlockAudio() {
-    this.sounds.background.play()
+  if (!this.bgMuted) {
+    this.sounds.wait.play()
       .then(() => console.log("Audio Unlocked!"))
       .catch(e => console.warn("Audio Unlock Failed:", e));
   }
+  document.removeEventListener("click", this.unlockAudio);
+  document.removeEventListener("keydown", this.unlockAudio);
+}
 
   play(sound) {
     if (!this.sounds[sound]) {
@@ -102,13 +107,18 @@ export class SoundManager {
   gameOver() {
     this.stop('background');
     this.play('gameOver');
-    this.play('wait');
+    this.sounds.gameOver.onended = () => this.play('wait');
   }
 
   startGame() {
-    this.stop('wait');
+  console.log("startGame called - stopping wait sound");
+  this.stop('wait');
+  
+  if (!this.bgMuted) {
+    console.log("Playing background music");
     this.play('background');
   }
+}
 
   maxCoins() {
     this.stop('background');

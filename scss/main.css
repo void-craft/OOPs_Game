@@ -13,15 +13,21 @@
 .point-icon {
   position: absolute;
   background-image: url("https://i.ibb.co/BKvC5Hqb/crabby-coin.png");
-  background-size: contain;
-  width: 25px;
-  height: 25px;
   animation: floatAndFlip 1s ease-out;
-  pointer-events: none;
 }
 
 .life-icon {
   background-image: url("https://i.ibb.co/5XRbNs2F/heart.png");
+  margin-right: 5px;
+}
+
+.life-icon,
+.point-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  pointer-events: none;
 }
 
 .character {
@@ -156,12 +162,12 @@
   padding: 1%;
 }
 .main__scoreboard {
-  background-color: #330867;
   width: 20%;
-  box-shadow: 0px 0px 15px white;
+  box-shadow: 0px 0px 10px white;
   font-size: 28px;
-  color: white;
+  color: #330867;
   font-weight: bold;
+  font-family: "MedievalSharp", serif;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -188,11 +194,10 @@
   border-radius: 10px;
   width: 55%;
   height: 80%;
-  background-image: url("https://i.ibb.co/PsMXHTwd/game-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
-  box-shadow: 0px 0px 15px white;
+  box-shadow: 0px 0px 10px white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -323,7 +328,7 @@
   padding: 0;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  background-image: url("https://i.ibb.co/hxzyr983/img-o-Tnf-PRIFyl0ov-SJY1nn-Lo.jpg");
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -333,7 +338,7 @@
 }
 .body__heading {
   font-family: "MedievalSharp", serif;
-  color: white;
+  color: #330867;
 }
 
 .game-over {
@@ -484,6 +489,14 @@
   padding: 0;
   color: white;
   font-family: "MedievalSharp", serif;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+.start-screen p {
+  padding: 0;
+  color: white;
+  font-family: "MedievalSharp", serif;
+  font-weight: bold;
+  font-size: 0.85rem;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 .start-screen__play-button {

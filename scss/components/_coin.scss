@@ -15,13 +15,19 @@
 .point-icon {
   position: absolute;
   background-image: $point-img;
-  background-size: contain;
-  width: 25px;
-  height: 25px;
   animation: floatAndFlip 1s ease-out;
-  pointer-events: none;
 }
 
 .life-icon {
   background-image: $life-img;
+  margin-right: 5px;
+}
+
+.life-icon,
+.point-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  pointer-events: none;
 }

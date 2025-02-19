@@ -1,6 +1,4 @@
 import { Character } from '../objects/character.js';
-import { Coin } from '../objects/coin.js';
-import { Obstacle } from '../objects/obstacle.js';
 import { ObjectSpawner } from './objectSpawner.js';
 import { GameUI } from '../ui/gameUI.js';
 import { SoundManager } from './soundManager.js';
@@ -35,7 +33,6 @@ export class Game {
     this.createScenario();
     this.spawner = new ObjectSpawner(this);
 
-    // Initialize CollisionManager
     this.collisionManager = new CollisionManager(this);
 
     if (this.ui.playButton) {
@@ -61,7 +58,7 @@ export class Game {
   startGame() {
     console.log('Game started!');
     this.isGameStarted = true;
-    this.ui.hideStartScreen(); // Hide start screen
+    this.ui.hideStartScreen();
     if (this.soundManager) {
       this.soundManager.startGame();
     }
@@ -83,7 +80,7 @@ export class Game {
     this.objects.forEach((obj) => this.removeObjectFromDOM(obj));
     this.objects = [];
 
-    this.ui.showGameOverScreen( // Show game over screen
+    this.ui.showGameOverScreen(
       this.punctuation,
       this.lives,
       this.totalCoinsCollected
@@ -94,7 +91,7 @@ export class Game {
     this.isGameOver = false;
     this.isGameStarted = false;
     this.isGameLoopOn = false;
-    this.ui.hideGameOverScreen(); // Hide game over screen
+    this.ui.hideGameOverScreen();
 
     this.punctuation = 0;
     this.lives = 3;
@@ -135,8 +132,7 @@ export class Game {
     if (this.isGameOver || !this.isGameLoopOn) return;
 
     this.character.applyGravity();
-    this.collisionManager.checkCollisions(); // Delegate collision handling to CollisionManager
-
+    this.collisionManager.checkCollisions();
     if (!this.isGameOver && this.isGameLoopOn) {
       requestAnimationFrame(() => this.gameLoop());
     }

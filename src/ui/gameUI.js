@@ -59,8 +59,7 @@ export class GameUI {
     if (this.playButton) {
       this.playButton.addEventListener('click', () => {
         this.hideStartScreen();
-        this.soundManager.stop('wait');
-        this.soundManager.play('background');
+        // this.soundManager.startGame();
       });
     }
 
@@ -122,19 +121,19 @@ export class GameUI {
 
    showStartScreen() {
     if (this.startScreen) {
-      this.startScreen.style.display = 'flex'; // Show start screen
+      this.startScreen.style.display = 'flex';
     }
   }
   
   hideStartScreen() {
     if (this.startScreen) {
-      this.startScreen.style.display = 'none'; // Hide start screen
+      this.startScreen.style.display = 'none';
     }
   }
 
   showGameOverScreen(score, lives, coins) {
     if (this.overlay) {
-      this.overlay.style.display = 'flex'; // Show game over screen
+      this.overlay.style.display = 'flex';
       if (this.finalScore) this.finalScore.textContent = `Final Score: ${score}`;
       if (this.finalLives) this.finalLives.textContent = `Lives Left: ${lives}`;
       if (this.finalCoins) this.finalCoins.textContent = `Coins Collected: ${coins}`;
@@ -143,7 +142,7 @@ export class GameUI {
 
   hideGameOverScreen() {
     if (this.overlay) {
-      this.overlay.style.display = 'none'; // Hide game over screen
+      this.overlay.style.display = 'none';
     }
   }
 

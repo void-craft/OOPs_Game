@@ -4,6 +4,7 @@ export class CollisionManager {
   constructor(game) {
     this.game = game;
   }
+
   checkCollisions() {
     if (this.game.isGameOver) return;
     for (let i = this.game.objects.length - 1; i >= 0; i--) {
@@ -24,6 +25,7 @@ export class CollisionManager {
       this.game.gameOver();
     }
   }
+  
   handleCoinCollision(coin, index) {
     this.game.soundManager.play('eat');
  

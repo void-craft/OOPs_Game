@@ -5,7 +5,7 @@
   padding: 0;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: linear-gradient(to top, $background-color-top 0%, $background-color-bottom 100%);
+  background-image: $gameBg-img;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -15,6 +15,6 @@
 
   &__heading {
     font-family: $header-font-family;
-    color: $secondary-color;
+    color: $primary-color;
   }
 }
